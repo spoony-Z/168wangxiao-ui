@@ -28,14 +28,17 @@
         </el-table-column>
       </template>
     </el-table>
-    <div v-if="showPagination" :style="pagingStyle">
+    <div v-if="showPagination">
       <!-- 前端根据数据列表分页 -->
-      <el-pagination  v-if="FrontendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination" :current-page="currentPage" :page-size="pageSize"
-        :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
-      <!-- 后端分页 -->
-        <el-pagination v-else-if="BackendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination" :current-page="currentPage" :page-size="pageSize"
-        :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
-        <div v-else-if="!BackendPaging && !BackendPaging && $scopedSlots[`paging`]">
+      <el-pagination v-if="frontendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination" :current-page="currentPage" :page-size="pageSize"
+        :total="total" @size-change="frontSizeChange" @current-change="frontCurrentChange"></el-pagination>
+        
+        <!-- 后端分页 -->
+        <el-pagination v-on="$listeners"  v-else-if="!frontendPaging && !$scopedSlots[`paging`]" class="pagination" :current-page="endPage.currentPage" :page-size="endPage.pageSize"
+        :total="endPage.total"></el-pagination>
+       
+        <!-- 自定义分页 -->
+        <div v-else-if="$scopedSlots[`paging`]">
           <slot name="paging" :tempData="tempData" :columns="columns"></slot>
         </div>
     </div>
@@ -49,10 +52,6 @@ export default {
     columns: {
       type: Array,
       default: () => []
-    },
-    pagination: {
-      type: Object,
-      default: () => ({})
     },
     data: {
       type: Array,
@@ -83,20 +82,29 @@ export default {
       default: true,
     },
     /** 前端分页 */
-    FrontendPaging: {
+    frontendPaging: {
       type: Boolean,
       default: false,
     },
+    /** 前端分页参数 */
+    FrontPage: {
+      type: Object,
+      default: () => ({})
+    },
+
     /** 后端分页 */
     BackendPaging: {
       type: Boolean,
       default: true,
     },
-    pagingStyle: {
+    /** 后端分页参数 */
+    endPage: {
       type: Object,
       default: () => {
         return {
-          'text-align': 'right'
+          currentPage: 1,
+          pageSize: 10,
+          total: 100
         }
       }
     }
@@ -118,11 +126,11 @@ export default {
       return this.data?.length || 0
     },
     tempPagination() {
-      return { ...defaultPagination, ...this.pagination }
+      return { ...defaultPagination, ...this.FrontPage }
     }
   },
   watch: {
-    pagination: {
+    FrontPage: {
       handler(nVal) {
         this.currentPage = nVal.currentPage || 1
         this.pageSize = nVal.pageSize || nVal.pageSizes?.[0] || 10
@@ -132,7 +140,7 @@ export default {
     },
     paging: {
       handler() {
-        this.getTableData()
+        this.frontGetTableData()
       },
       immediate: true,
       deep: true,
@@ -147,15 +155,19 @@ export default {
     }
   },
   methods: {
-    handleSizeChange(val) {
+    /**
+     * 前端分页
+     * @param {*} val 
+     */
+    frontSizeChange(val) {
       this.pageSize = val;
-      this.getTableData();
+      this.frontGetTableData();
     },
-    handleCurrentChange(val) {
+    frontCurrentChange(val) {
       this.currentPage = val;
-      this.getTableData();
+      this.frontGetTableData();
     },
-    getTableData() {
+    frontGetTableData() {
       const { offset, limit } = this.paging || {};
       this.tempData = this.data.filter((v, i) => i >= offset && i < (offset + limit))
     },
