@@ -8,17 +8,16 @@
 export default {
   name: 'App',
   data() {
+
     return {
       data: [{
-        name: "杨胜军"
+        name: 222
       }],
-      columns: [
-        {
+      columns: [{
           prop: "name",
           label: "姓名"
-        }
-      ]
+        }]
     }
-  }
+  },
 }
 </script>

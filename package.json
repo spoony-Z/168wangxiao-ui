@@ -2,7 +2,7 @@
   "name": "168wangxiao-ui",
   "version": "0.1.6",
   "description": "基于element-ui二次封装",
-  "author": "spoony-z", 
+  "author": "spoony-z",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,12 @@
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name 168wangxiao-ui -dest lib src/index.js"
   },
-  "keywords": ["基于element二次封装表格", "168wangxiao-ui", "npm", "vue"],
+  "keywords": [
+    "基于element二次封装表格",
+    "168wangxiao-ui",
+    "npm",
+    "vue"
+  ],
   "main": "./dist/168wangxiao-ui.common.js",
   "module": "./dist/168wangxiao-ui.umd.js",
   "exports": {
@@ -20,7 +25,9 @@
       "require": "./dist/168wangxiao-ui.common.js"
     }
   },
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.15.13",

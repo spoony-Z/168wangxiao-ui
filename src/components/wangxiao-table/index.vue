@@ -6,7 +6,8 @@
         <slot name="append"></slot>
       </template>
       <template v-for="item in columns">
-        <el-table-column v-if=" item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`" v-bind="item">
+        <el-table-column v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
+          v-bind="item">
           <template #header="scope">
             <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
           </template>
@@ -30,17 +31,18 @@
     </el-table>
     <div v-if="showPagination">
       <!-- 前端根据数据列表分页 -->
-      <el-pagination v-if="frontendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination" :current-page="currentPage" :page-size="pageSize"
-        :total="total" @size-change="frontSizeChange" @current-change="frontCurrentChange"></el-pagination>
-        
-        <!-- 后端分页 -->
-        <el-pagination v-on="$listeners"  v-else-if="!frontendPaging && !$scopedSlots[`paging`]" class="pagination" :current-page="endPage.currentPage" :page-size="endPage.pageSize"
-        :total="endPage.total"></el-pagination>
-       
-        <!-- 自定义分页 -->
-        <div v-else-if="$scopedSlots[`paging`]">
-          <slot name="paging" :tempData="tempData" :columns="columns"></slot>
-        </div>
+      <el-pagination v-if="frontendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination"
+        :current-page="currentPage" :page-size="pageSize" :total="total" @size-change="frontSizeChange"
+        @current-change="frontCurrentChange"></el-pagination>
+
+      <!-- 后端分页 -->
+      <el-pagination v-on="$listeners" v-else-if="!frontendPaging && !$scopedSlots[`paging`]" class="pagination"
+        :current-page="endPage.currentPage" :page-size="endPage.pageSize" :total="endPage.total"></el-pagination>
+
+      <!-- 自定义分页 -->
+      <div v-else-if="$scopedSlots[`paging`]">
+        <slot name="paging" :tempData="tempData" :columns="columns"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -130,6 +132,13 @@ export default {
     }
   },
   watch: {
+    'data': {
+      handler() {
+        this.tempData = this.data;
+      },
+      deep: true,
+      immediate: true,
+    },
     FrontPage: {
       handler(nVal) {
         this.currentPage = nVal.currentPage || 1
