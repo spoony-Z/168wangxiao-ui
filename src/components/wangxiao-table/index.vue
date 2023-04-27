@@ -104,7 +104,7 @@ export default {
         return {
           currentPage: 1,
           pageSize: 10,
-          total: 100
+          total: 0
         }
       }
     }
