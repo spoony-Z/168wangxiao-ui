@@ -174,3 +174,80 @@ export default {
 
 ```
 
+## 组件传参
+
+```javascript
+  props: {
+    columns: {
+      type: Array,
+      default: () => []
+    },
+    data: {
+      type: Array,
+      default: () => []
+    },
+    headerCellStyle: {
+      type: Function || Object,
+      default: () => {
+        return {
+          'background-color': '#f5f6f7',
+          'font-size': '12px',
+          'padding': '10px',
+        }
+      }
+    },
+    cellStyle: {
+      type: Function || Object,
+      default: () => {
+        return {
+          'font-size': '12px',
+          'padding': '10px'
+        }
+      }
+    },
+    /** 是否显示分页 */
+    showPagination: {
+      type: Boolean,
+      default: true,
+    },
+    /** 前端分页 */
+    frontendPaging: {
+      type: Boolean,
+      default: false,
+    },
+    /** 前端分页参数 */
+    FrontPage: {
+      type: Object,
+      default: () => ({})
+    },
+
+    /** 后端分页 */
+    BackendPaging: {
+      type: Boolean,
+      default: true,
+    },
+    /** 后端分页参数 */
+    endPage: {
+      type: Object,
+      default: () => {
+        return {
+          currentPage: 1,
+          pageSize: 10,
+          total: 0
+        }
+      }
+    },
+    pageSizes: {
+      default() {
+        return [10, 20, 30, 50, 100];
+      },
+      type: Array
+    },
+    layout: {
+      default() {
+        return 'total, sizes, prev, pager, next, jumper';
+      },
+      type: String
+    },
+  },
+```

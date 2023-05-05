@@ -32,17 +32,20 @@
     <div v-if="showPagination">
       <!-- 前端根据数据列表分页 -->
       <el-pagination v-if="frontendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination"
-        :current-page="currentPage" :page-size="pageSize" :total="total" @size-change="frontSizeChange"
+        :current-page="currentPage" :page-size="fontPageSize" :total="fontTotal" @size-change="frontSizeChange"
         @current-change="frontCurrentChange"></el-pagination>
 
       <!-- 后端分页 -->
-      <el-pagination v-on="$listeners" v-else-if="!frontendPaging && !$scopedSlots[`paging`]" class="pagination"
-        :current-page="endPage.currentPage" :page-size="endPage.pageSize" :total="endPage.total"></el-pagination>
+      <el-pagination class="pagination" v-else-if="!frontendPaging && !$scopedSlots[`paging`]" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" :current-page="endPage.currentPage" :page-sizes="pageSizes" :page-size="endPage.pageSize"
+        :layout="layout" :total="endPage.total">
+      </el-pagination>
 
       <!-- 自定义分页 -->
       <div v-else-if="$scopedSlots[`paging`]">
         <slot name="paging" :tempData="tempData" :columns="columns"></slot>
       </div>
+
     </div>
   </div>
 </template>
@@ -109,22 +112,32 @@ export default {
           total: 0
         }
       }
-    }
+    },
+    pageSizes: {
+      default() {
+        return [10, 20, 30, 50, 100];
+      },
+      type: Array
+    },
+    layout: {
+      default() {
+        return 'total, sizes, prev, pager, next, jumper';
+      },
+      type: String
+    },
   },
   data() {
     return {
-      currentPage: 1,
-      pageSize: 10,
+      fontPageSize: 10,
       tempData: [],
     }
   },
   computed: {
     paging() {
-      const offset = (this.currentPage - 1) * this.pageSize
-      return { offset, limit: this.pageSize }
+      const offset = (this.currentPage - 1) * this.fontPageSize
+      return { offset, limit: this.fontPageSize }
     },
-    total() {
-      // return this.data?.length || 0
+    fontTotal() {
       return this.data?.length || 0
     },
     tempPagination() {
@@ -142,7 +155,7 @@ export default {
     FrontPage: {
       handler(nVal) {
         this.currentPage = nVal.currentPage || 1
-        this.pageSize = nVal.pageSize || nVal.pageSizes?.[0] || 10
+        this.fontPageSize = nVal.fontPageSize || nVal.pageSizes?.[0] || 10
       },
       immediate: true,
       deep: true,
@@ -169,7 +182,7 @@ export default {
      * @param {*} val 
      */
     frontSizeChange(val) {
-      this.pageSize = val;
+      this.fontPageSize = val;
       this.frontGetTableData();
     },
     frontCurrentChange(val) {
@@ -180,6 +193,17 @@ export default {
       const { offset, limit } = this.paging || {};
       this.tempData = this.data.filter((v, i) => i >= offset && i < (offset + limit))
     },
+
+    /**
+     * 后端分页 重写分页回调，解决与表格回调冲突
+     * @param {*} val
+     */
+     handleCurrentChange(val){
+      this.$emit("current-paging", val)
+     },
+     handleSizeChange(val){
+      this.$emit("size-paging", val)
+     }
   }
 
 }
