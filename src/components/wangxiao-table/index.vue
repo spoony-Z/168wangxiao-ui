@@ -1,11 +1,20 @@
 <template>
   <div>
+    <div class="top-btn">
+      <div>
+        <slot name="table-top-btn"></slot>
+      </div>
+      <div>
+        <slot name="table-right-btn"></slot>
+        <el-button icon="el-icon-setting" size="small" @click="dialogVisible = true">自定义列</el-button>
+      </div>
+    </div>
     <el-table ref="table" :data="tempData" :header-cell-style="headerCellStyle" :cell-style="cellStyle" v-bind="$attrs"
       v-on="$listeners">
       <template v-if="$slots.append" slot="append">
         <slot name="append"></slot>
       </template>
-      <template v-for="item in columns">
+      <template v-for="item in copyColumns">
         <el-table-column v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
           v-bind="item">
           <template #header="scope">
@@ -36,17 +45,38 @@
         @current-change="frontCurrentChange"></el-pagination>
 
       <!-- 后端分页 -->
-      <el-pagination class="pagination" v-else-if="!frontendPaging && !$scopedSlots[`paging`]" @size-change="handleSizeChange"
-        @current-change="handleCurrentChange" :current-page="endPage.currentPage" :page-sizes="pageSizes" :page-size="endPage.pageSize"
-        :layout="layout" :total="endPage.total">
+      <el-pagination class="pagination" v-else-if="!frontendPaging && !$scopedSlots[`paging`]"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="endPage.currentPage"
+        :page-sizes="pageSizes" :page-size="endPage.pageSize" :layout="layout" :total="endPage.total">
       </el-pagination>
 
       <!-- 自定义分页 -->
       <div v-else-if="$scopedSlots[`paging`]">
-        <slot name="paging" :tempData="tempData" :columns="columns"></slot>
+        <slot name="paging" :tempData="tempData" :columns="copyColumns"></slot>
       </div>
-
     </div>
+
+    <!-- 设置列 -->
+    <el-dialog :visible.sync="dialogVisible" width="30%">
+      <template #title>
+        <span class="dialog-title">自定义设置表格列</span>
+      </template>
+      <div>请选择在表格中显示的数据列</div>
+
+      <el-card class="box-card" shadow="never">
+        <div slot="header" class="clearfix">
+          <span>卡片名称</span>
+        </div>
+        <el-checkbox-group v-model="checkList">
+          <el-checkbox v-for="(item, index) in columns" :key="index" :label="item.prop">{{ item.label }}</el-checkbox>
+        </el-checkbox-group>
+      </el-card>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="determine">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -125,11 +155,21 @@ export default {
       },
       type: String
     },
+
+    /** 是否显示自定义列 */
+    showColumns: {
+      default: false,
+      type: Boolean
+    },
+    
   },
   data() {
     return {
       fontPageSize: 10,
       tempData: [],
+      dialogVisible: false,
+      checkList: [],
+      copyColumns: [],
     }
   },
   computed: {
@@ -166,7 +206,7 @@ export default {
       },
       immediate: true,
       deep: true,
-    }
+    },
   },
   mounted() {
     const tempStore = this.$refs?.table || {}
@@ -175,6 +215,8 @@ export default {
         this[key] = tempStore[key]
       }
     }
+    this.processingColum();
+    this.determine();
   },
   methods: {
     /**
@@ -198,13 +240,38 @@ export default {
      * 后端分页 重写分页回调，解决与表格回调冲突
      * @param {*} val
      */
-     handleCurrentChange(val){
+    handleCurrentChange(val) {
       this.$emit("current-paging", val)
-     },
-     handleSizeChange(val){
+    },
+    handleSizeChange(val) {
       this.$emit("size-paging", val)
-     }
+    },
+    processingColum() {
+      /** 列处理 */
+      this.copyColumns = JSON.parse(JSON.stringify(this.columns));
+      let itemColum = this.columns.filter((item) => item.show !== false)
+      itemColum.map((item) => this.checkList.push(item.prop))
+    },
+    determine() {
+      this.dialogVisible = false;
+      let add = this.columns.filter(item => this.checkList.some(ele => ele === item.prop))
+      this.copyColumns = add
+    }
   }
 
 }
 </script>
+
+<style scoped>
+.top-btn {
+  display: flex;
+  margin: 10px 0;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.dialog-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+</style>
