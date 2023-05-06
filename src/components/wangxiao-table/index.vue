@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="top-btn">
+    <div class="top-btn" v-if="showColumns">
       <div>
         <slot name="table-top-btn"></slot>
       </div>
@@ -39,7 +39,7 @@
       </template>
     </el-table>
     <div v-if="showPagination">
-      <!-- 前端根据数据列表分页 -->
+      <!-- 前端根据数据分页 -->
       <el-pagination v-if="frontendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination"
         :current-page="currentPage" :page-size="fontPageSize" :total="fontTotal" @size-change="frontSizeChange"
         @current-change="frontCurrentChange"></el-pagination>
@@ -57,24 +57,27 @@
     </div>
 
     <!-- 设置列 -->
-    <el-dialog :visible.sync="dialogVisible" width="30%">
+    <el-dialog :visible.sync="dialogVisible" width="600px" v-if="showColumns">
       <template #title>
         <span class="dialog-title">自定义设置表格列</span>
       </template>
-      <div>请选择在表格中显示的数据列</div>
-
+      <div style="padding-bottom: 20px;">请选择在表格中显示的数据列</div>
       <el-card class="box-card" shadow="never">
         <div slot="header" class="clearfix">
-          <span>卡片名称</span>
+          <span> <el-checkbox disabled>多选项</el-checkbox></span>
         </div>
         <el-checkbox-group v-model="checkList">
-          <el-checkbox v-for="(item, index) in columns" :key="index" :label="item.prop">{{ item.label }}</el-checkbox>
+          <el-checkbox v-for="(item, index) in columns" :key="index" :label="item.prop">
+            <el-tooltip placement="top" effect="light">
+              <span slot="content">{{ item.label }}</span>
+              <span class="isEllipsis">{{ item.label }}</span>
+            </el-tooltip>
+          </el-checkbox>
         </el-checkbox-group>
       </el-card>
-
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="determine">确 定</el-button>
+        <el-button @click="dialogVisible = false" size="small">取 消</el-button>
+        <el-button type="primary" @click="determine" size="small">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -161,7 +164,7 @@ export default {
       default: false,
       type: Boolean
     },
-    
+
   },
   data() {
     return {
@@ -227,10 +230,12 @@ export default {
       this.fontPageSize = val;
       this.frontGetTableData();
     },
+
     frontCurrentChange(val) {
       this.currentPage = val;
       this.frontGetTableData();
     },
+
     frontGetTableData() {
       const { offset, limit } = this.paging || {};
       this.tempData = this.data.filter((v, i) => i >= offset && i < (offset + limit))
@@ -243,19 +248,23 @@ export default {
     handleCurrentChange(val) {
       this.$emit("current-paging", val)
     },
+
     handleSizeChange(val) {
       this.$emit("size-paging", val)
     },
+
     processingColum() {
       /** 列处理 */
       this.copyColumns = JSON.parse(JSON.stringify(this.columns));
       let itemColum = this.columns.filter((item) => item.show !== false)
       itemColum.map((item) => this.checkList.push(item.prop))
     },
+
     determine() {
       this.dialogVisible = false;
       let add = this.columns.filter(item => this.checkList.some(ele => ele === item.prop))
       this.copyColumns = add
+      this.$refs.table.doLayout();
     }
   }
 
@@ -273,5 +282,33 @@ export default {
 .dialog-title {
   font-size: 18px;
   font-weight: bold;
+}
+
+>>> .isEllipsis {
+  display: inline-block;
+  width: 85px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+>>>.el-checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-right: 0px
+}
+
+>>> .el-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 20px;
+}
+>>> .el-dialog__body {
+  padding: 10px 20px 10px 20px;
+}
+
+>>> .el-card__header {
+  padding: 10px 20px;
 }
 </style>
