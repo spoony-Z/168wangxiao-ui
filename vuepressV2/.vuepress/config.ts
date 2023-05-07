@@ -1,4 +1,3 @@
-import { Button } from "element-ui";
 import { defineUserConfig } from "vuepress";
 import recoTheme from "vuepress-theme-reco";
 
@@ -10,7 +9,6 @@ export default defineUserConfig({
     logo: "/logo.png",
     author: "168wangxiao技术团队",
     authorAvatar: "/head.png",
-    blog: false,
 
     /** z主题色 */
     // primaryColor: '#1989fa',
