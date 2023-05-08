@@ -9,7 +9,7 @@ export default defineUserConfig({
     logo: "/logo.png",
     author: "168wangxiao技术团队",
     authorAvatar: "/head.png",
-    base: '/',
+    base: '/168wangxiao-ui/',
 
     /** z主题色 */
     // primaryColor: '#1989fa',
@@ -40,7 +40,8 @@ export default defineUserConfig({
       "/blogs/": [ 'InstallIntroduc', 'use', 'table', 'button' ],
     },
     navbar: [
-      { text: "首页", link: "/", icon: "Home" },
+      '',
+      { text: "首页", link: "/168wangxiao-ui", icon: "Home" },
       // {
       //   text: "Docs",
       //   children: [
