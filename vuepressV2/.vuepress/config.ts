@@ -9,7 +9,7 @@ export default defineUserConfig({
     logo: "/logo.png",
     author: "168wangxiao技术团队",
     authorAvatar: "/head.png",
-    base: '/',
+    base: '/168wangxiao-ui/',
 
     /** z主题色 */
     // primaryColor: '#1989fa',
