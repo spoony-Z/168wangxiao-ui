@@ -4,12 +4,12 @@ import recoTheme from "vuepress-theme-reco";
 export default defineUserConfig({
   title: "168wangxiao-ui",
   description: "168wangxiao-ui",
+  base: '/168wangxiao-ui/',
   theme: recoTheme({
     style: "@vuepress-reco/style-default",
     logo: "/logo.png",
-    author: "168wangxiao技术团队",
+    // author: "168wangxiao技术团队",
     authorAvatar: "/head.png",
-    base: '/168wangxiao-ui/',
 
     /** z主题色 */
     // primaryColor: '#1989fa',

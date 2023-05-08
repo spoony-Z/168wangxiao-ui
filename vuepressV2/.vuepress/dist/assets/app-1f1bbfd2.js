@@ -1,7 +1,7 @@
 import { d as defineAsyncComponent, r as ref, a as readonly, b as reactive, c as defineComponent, i as inject, e as isString$1, f as isArray, g as dedupeHead, h as resolveLocalePath, o as onMounted, j as computed, k as h, l as isLinkHttp, m as removeLeadingSlash, n as resolveComponent, u as unref, p as openBlock, q as createElementBlock, s as createBaseVNode, t as createVNode, v as normalizeStyle, w as createCommentVNode, _ as _export_sfc, x as useRouter, y as toRefs, z as watch, A as getCurrentInstance, B as nextTick, C as isRef, D as getCurrentScope, E as onScopeDispose, F as shallowRef, G as onUnmounted, H as toDisplayString, I as Fragment, J as renderList, K as normalizeClass, L as createBlock, M as onBeforeUnmount, N as withDirectives, O as vModelDynamic, P as vModelText, Q as vShow, R as createTextVNode, S as provide, T as useRoute, U as setupDevtoolsPlugin, V as Transition, W as isFunction$1, X as removeEndingSlash, Y as renderSlot, Z as createStaticVNode, $ as useSlots, a0 as resolveDynamicComponent, a1 as onBeforeUpdate, a2 as isPlainObject, a3 as withCtx, a4 as isLinkMailto, a5 as isLinkTel, a6 as mergeProps, a7 as createSSRApp, a8 as RouterView, a9 as createRouter, aa as START_LOCATION_NORMALIZED, ab as createWebHistory } from "./framework-847321c2.js";
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
-  return "/" + dep;
+  return "/168wangxiao-ui/" + dep;
 };
 const seen = {};
 const __vitePreload = function preload(baseModule, deps, importerUrl) {
@@ -80,7 +80,7 @@ const pagesData$1 = {
     "./404.html-bd7a96c7.js"
   ), true ? [] : void 0).then(({ data }) => data)
 };
-const siteData$1 = JSON.parse('{"base":"/","lang":"en-US","title":"168wangxiao-ui","description":"168wangxiao-ui","head":[],"locales":{}}');
+const siteData$1 = JSON.parse('{"base":"/168wangxiao-ui/","lang":"en-US","title":"168wangxiao-ui","description":"168wangxiao-ui","head":[],"locales":{}}');
 const pagesComponents = {
   // path: /timeline/
   "v-01560935": defineAsyncComponent(() => __vitePreload(() => import(
@@ -284,9 +284,9 @@ var defineClientConfig = (clientConfig = {}) => clientConfig;
 var withBase = (url) => {
   if (isLinkHttp(url))
     return url;
-  return `${"/"}${removeLeadingSlash(url)}`;
+  return `${"/168wangxiao-ui/"}${removeLeadingSlash(url)}`;
 };
-const themeData$1 = JSON.parse('{"style":"@vuepress-reco/style-default","logo":"/logo.png","author":"168wangxiao技术团队","authorAvatar":"/head.png","base":"/168wangxiao-ui/","colorMode":"dark","docsRepo":"https://github.com/vuepress-reco/vuepress-theme-reco-next","lastUpdatedText":"168wangxiao-ui版本升级","series":{"/blogs/":["InstallIntroduc","use","table","button"]},"navbar":["",{"text":"首页","link":"/168wangxiao-ui","icon":"Home"}],"bulletin":{"body":[{"type":"text","content":"基于element-ui封装的表格组件，便利开发，慎用！慎用！慎用！慎用！🎉🎉🎉","style":"font-size: 14px;"},{"type":"hr"},{"type":"title","content":"联系方式"},{"type":"text","content":"\\n          <ul>\\n            <li>QQ：暂无</li>\\n            <li>微信：暂无</li>\\n            <li>电话：暂无</li>\\n            <li>邮箱：暂无</li>\\n          </ul>","style":"font-size: 12px;"}]}}');
+const themeData$1 = JSON.parse('{"style":"@vuepress-reco/style-default","logo":"/logo.png","authorAvatar":"/head.png","colorMode":"dark","docsRepo":"https://github.com/vuepress-reco/vuepress-theme-reco-next","lastUpdatedText":"168wangxiao-ui版本升级","series":{"/blogs/":["InstallIntroduc","use","table","button"]},"navbar":["",{"text":"首页","link":"/168wangxiao-ui","icon":"Home"}],"bulletin":{"body":[{"type":"text","content":"基于element-ui封装的表格组件，便利开发，慎用！慎用！慎用！慎用！🎉🎉🎉","style":"font-size: 14px;"},{"type":"hr"},{"type":"title","content":"联系方式"},{"type":"text","content":"\\n          <ul>\\n            <li>QQ：暂无</li>\\n            <li>微信：暂无</li>\\n            <li>电话：暂无</li>\\n            <li>邮箱：暂无</li>\\n          </ul>","style":"font-size: 12px;"}]}}');
 const themeData = ref(themeData$1);
 const useThemeData = () => themeData;
 const themeLocaleDataSymbol = Symbol("");
@@ -69386,7 +69386,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   }
 });
 const Layout = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__file", "Layout.vue"]]);
-const _imports_0 = "/assets/taken-42974550.svg";
+const _imports_0 = "/168wangxiao-ui/assets/taken-42974550.svg";
 const _hoisted_1 = /* @__PURE__ */ createBaseVNode(
   "h1",
   null,
@@ -69523,7 +69523,7 @@ var createRoutes = () => pagesRoutes.reduce(
 var historyCreator = createWebHistory;
 var createVueRouter = () => {
   const router = createRouter({
-    history: historyCreator(removeEndingSlash("/")),
+    history: historyCreator(removeEndingSlash("/168wangxiao-ui/")),
     routes: createRoutes(),
     scrollBehavior: (to, from, savedPosition) => {
       if (savedPosition)

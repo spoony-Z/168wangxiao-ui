@@ -4133,7 +4133,7 @@ li svg{
   padding: 0 0.5rem 0 2rem;
   outline: none;
   transition: all ease 0.3s;
-  background: var(--search-bg-color) url('/assets/search-0782d0d1.svg') 0.6rem 0.5rem no-repeat;
+  background: var(--search-bg-color) url('/168wangxiao-ui/assets/search-0782d0d1.svg') 0.6rem 0.5rem no-repeat;
   background-size: 1rem;
 }
 
@@ -4286,8 +4286,8 @@ li svg{
   width: 2rem;
   height: 1.2rem;
   background-color: var(--back-to-top-color);
-  -webkit-mask: url('/assets/back-to-top-8efcbe56.svg') no-repeat;
-          mask: url('/assets/back-to-top-8efcbe56.svg') no-repeat;
+  -webkit-mask: url('/168wangxiao-ui/assets/back-to-top-8efcbe56.svg') no-repeat;
+          mask: url('/168wangxiao-ui/assets/back-to-top-8efcbe56.svg') no-repeat;
   z-index: var(--back-to-top-z-index);
 }
 
@@ -7702,7 +7702,7 @@ li svg{
 }
   #docsearch-container .DocSearch-Button {
 
-    background: url('/assets/search-27cc0fb7.svg') 0.4rem 0.4rem no-repeat;
+    background: url('/168wangxiao-ui/assets/search-27cc0fb7.svg') 0.4rem 0.4rem no-repeat;
     background-size: 1.2rem 1.2rem;
   }
   #docsearch-container .DocSearch-Button svg {
@@ -11296,7 +11296,7 @@ pre[class*="language-"] {
     border-color: rgb(93 103 232 / var(--tw-border-opacity)) !important;
 }
   .search-box input {
-    background: url('/assets/search-27cc0fb7.svg') 0.4rem 0.3rem no-repeat;
+    background: url('/168wangxiao-ui/assets/search-27cc0fb7.svg') 0.4rem 0.3rem no-repeat;
     background-size: 1.2rem 1.2rem;
   }
   .search-box .suggestions {
