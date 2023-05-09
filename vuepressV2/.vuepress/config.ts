@@ -15,7 +15,7 @@ export default defineUserConfig({
     // primaryColor: '#1989fa',
 
     /** 主题 */
-    colorMode: 'dark',
+    // colorMode: 'dark',
 
     /** 文档源文件的仓库 URL 它将会用于生成 编辑此页 的链接。如果你不设置该选项，则默认会使用 repo 配置项。但是如果你的文档源文件是在一个不同的仓库内，你就需要设置该配置项了。 */
     docsRepo: "https://github.com/vuepress-reco/vuepress-theme-reco-next",
@@ -40,8 +40,7 @@ export default defineUserConfig({
       "/blogs/": [ 'InstallIntroduc', 'use', 'table', 'button' ],
     },
     navbar: [
-      '',
-      { text: "首页", link: "/168wangxiao-ui", icon: "Home" },
+      { text: "首页", link: "/", icon: "Home" },
       // {
       //   text: "Docs",
       //   children: [

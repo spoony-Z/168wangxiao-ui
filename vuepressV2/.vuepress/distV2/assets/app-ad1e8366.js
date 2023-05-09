@@ -52,7 +52,7 @@ const pagesData$1 = {
   // path: /
   "v-8daa1a0e": () => __vitePreload(() => import(
     /* webpackChunkName: "v-8daa1a0e" */
-    "./index.html-fc1f0a17.js"
+    "./index.html-c81dcb15.js"
   ), true ? [] : void 0).then(({ data }) => data),
   // path: /blogs/button.html
   "v-c4e1d1e0": () => __vitePreload(() => import(
@@ -85,13 +85,13 @@ const pagesComponents = {
   // path: /timeline/
   "v-01560935": defineAsyncComponent(() => __vitePreload(() => import(
     /* webpackChunkName: "v-01560935" */
-    "./index.html-5dfa1975.js"
-  ), true ? ["assets/index.html-5dfa1975.js","assets/framework-847321c2.js"] : void 0)),
+    "./index.html-cafa5726.js"
+  ), true ? ["assets/index.html-cafa5726.js","assets/framework-847321c2.js"] : void 0)),
   // path: /
   "v-8daa1a0e": defineAsyncComponent(() => __vitePreload(() => import(
     /* webpackChunkName: "v-8daa1a0e" */
-    "./index.html-cafa5726.js"
-  ), true ? ["assets/index.html-cafa5726.js","assets/framework-847321c2.js"] : void 0)),
+    "./index.html-5dfa1975.js"
+  ), true ? ["assets/index.html-5dfa1975.js","assets/framework-847321c2.js"] : void 0)),
   // path: /blogs/button.html
   "v-c4e1d1e0": defineAsyncComponent(() => __vitePreload(() => import(
     /* webpackChunkName: "v-c4e1d1e0" */
@@ -286,7 +286,7 @@ var withBase = (url) => {
     return url;
   return `${"/168wangxiao-ui/"}${removeLeadingSlash(url)}`;
 };
-const themeData$1 = JSON.parse('{"style":"@vuepress-reco/style-default","logo":"/logo.png","authorAvatar":"/head.png","colorMode":"dark","docsRepo":"https://github.com/vuepress-reco/vuepress-theme-reco-next","lastUpdatedText":"168wangxiao-ui版本升级","series":{"/blogs/":["InstallIntroduc","use","table","button"]},"navbar":["",{"text":"首页","link":"/168wangxiao-ui","icon":"Home"}],"bulletin":{"body":[{"type":"text","content":"基于element-ui封装的表格组件，便利开发，慎用！慎用！慎用！慎用！🎉🎉🎉","style":"font-size: 14px;"},{"type":"hr"},{"type":"title","content":"联系方式"},{"type":"text","content":"\\n          <ul>\\n            <li>QQ：暂无</li>\\n            <li>微信：暂无</li>\\n            <li>电话：暂无</li>\\n            <li>邮箱：暂无</li>\\n          </ul>","style":"font-size: 12px;"}]}}');
+const themeData$1 = JSON.parse('{"style":"@vuepress-reco/style-default","logo":"/logo.png","authorAvatar":"/head.png","docsRepo":"https://github.com/vuepress-reco/vuepress-theme-reco-next","lastUpdatedText":"168wangxiao-ui版本升级","series":{"/blogs/":["InstallIntroduc","use","table","button"]},"navbar":[{"text":"首页","link":"/","icon":"Home"}],"bulletin":{"body":[{"type":"text","content":"基于element-ui封装的表格组件，便利开发，慎用！慎用！慎用！慎用！🎉🎉🎉","style":"font-size: 14px;"},{"type":"hr"},{"type":"title","content":"联系方式"},{"type":"text","content":"\\n          <ul>\\n            <li>QQ：暂无</li>\\n            <li>微信：暂无</li>\\n            <li>电话：暂无</li>\\n            <li>邮箱：暂无</li>\\n          </ul>","style":"font-size: 12px;"}]}}');
 const themeData = ref(themeData$1);
 const useThemeData = () => themeData;
 const themeLocaleDataSymbol = Symbol("");
