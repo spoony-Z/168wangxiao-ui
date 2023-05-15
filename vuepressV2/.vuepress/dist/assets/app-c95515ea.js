@@ -52,7 +52,7 @@ const pagesData$1 = {
   // path: /
   "v-8daa1a0e": () => __vitePreload(() => import(
     /* webpackChunkName: "v-8daa1a0e" */
-    "./index.html-c81dcb15.js"
+    "./index.html-7a56819e.js"
   ), true ? [] : void 0).then(({ data }) => data),
   // path: /blogs/button.html
   "v-c4e1d1e0": () => __vitePreload(() => import(
@@ -85,13 +85,13 @@ const pagesComponents = {
   // path: /timeline/
   "v-01560935": defineAsyncComponent(() => __vitePreload(() => import(
     /* webpackChunkName: "v-01560935" */
-    "./index.html-cafa5726.js"
-  ), true ? ["assets/index.html-cafa5726.js","assets/framework-847321c2.js"] : void 0)),
+    "./index.html-5dfa1975.js"
+  ), true ? ["assets/index.html-5dfa1975.js","assets/framework-847321c2.js"] : void 0)),
   // path: /
   "v-8daa1a0e": defineAsyncComponent(() => __vitePreload(() => import(
     /* webpackChunkName: "v-8daa1a0e" */
-    "./index.html-5dfa1975.js"
-  ), true ? ["assets/index.html-5dfa1975.js","assets/framework-847321c2.js"] : void 0)),
+    "./index.html-cafa5726.js"
+  ), true ? ["assets/index.html-cafa5726.js","assets/framework-847321c2.js"] : void 0)),
   // path: /blogs/button.html
   "v-c4e1d1e0": defineAsyncComponent(() => __vitePreload(() => import(
     /* webpackChunkName: "v-c4e1d1e0" */
