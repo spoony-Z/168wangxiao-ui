@@ -3,7 +3,7 @@ home: true
 modules:
   - BannerBrand
   - MdContent
-  - Footer
+  # - Footer
 #  - Blog
 bannerBrand:
   bgImage: '/bg.svg'

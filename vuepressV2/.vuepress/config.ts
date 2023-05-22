@@ -95,5 +95,5 @@ export default defineUserConfig({
     //   hideComments: true // 隐藏评论
     // },
   }),
-  debug: true,
+  debug: false,
 });

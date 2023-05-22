@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <wangxiao-table :data="data" :columns="columns" showColumns>
+    <wangxiao-table :data="data" :columns="columns" showColumns :frontendPaging="true">
       <template #table-top-btn>
         <el-button>默认按钮</el-button>
       </template>
@@ -60,6 +60,78 @@ export default {
         qita1: "空军基地就",
         qita2: "空军基地就",
         qita3: "空军基地就",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "空军基地就",
+        qita2: "空军基地就",
+        qita3: "空军基地就",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "空军基地就",
+        qita2: "空军基地就",
+        qita3: "空军基地就",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "空军基地就",
+        qita2: "空军基地就",
+        qita3: "空军基地就",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "空军基地就",
+        qita2: "空军基地就",
+        qita3: "空军基地就",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "空军基地就",
+        qita2: "空军基地就",
+        qita3: "空军基地就",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "空军基地就",
+        qita2: "空军基地就",
+        qita3: "空军基地就",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "++++++++++++",
+        qita2: "++++++++++++",
+        qita3: "++++++++++++",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "++++++++++++",
+        qita2: "++++++++++++",
+        qita3: "++++++++++++",
+      },
+      {
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "++++++++++++",
+        qita2: "++++++++++++",
+        qita3: "++++++++++++",
       }],
       columns: [{
         prop: "name",

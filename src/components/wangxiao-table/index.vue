@@ -169,6 +169,7 @@ export default {
   data() {
     return {
       fontPageSize: 10,
+      currentPage: 1,
       tempData: [],
       dialogVisible: false,
       checkList: [],
@@ -284,7 +285,7 @@ export default {
   font-weight: bold;
 }
 
->>> .isEllipsis {
+>>>.isEllipsis {
   display: inline-block;
   width: 85px;
   overflow: hidden;
@@ -298,17 +299,18 @@ export default {
   margin-right: 0px
 }
 
->>> .el-checkbox-group {
+>>>.el-checkbox-group {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 20px;
 }
->>> .el-dialog__body {
+
+>>>.el-dialog__body {
   padding: 10px 20px 10px 20px;
 }
 
->>> .el-card__header {
+>>>.el-card__header {
   padding: 10px 20px;
 }
 </style>
