@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <wangxiao-table :data="data" :columns="columns" showColumns :frontendPaging="true">
+    <wangxiao-table drag row-key="id" :data="data" :columns="columns" showColumns :frontendPaging="true">
       <template #table-top-btn>
         <el-button>默认按钮</el-button>
       </template>
@@ -9,15 +9,24 @@
       </template>
     </wangxiao-table>
 
+    <!-- <div class="draggable" style="padding: 20px">
+      <el-table row-key="id" :data="tableData" style="width: 100%" border>
+        <el-table-column v-for="(item, index) in oldList" :key="`col_${index}`" :prop="newList[index].prop"
+          :label="item.label" align="center">
+        </el-table-column>
+      </el-table>
+    </div> -->
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'App',
   data() {
     return {
       data: [{
+        id: 1,
         name: 222,
         age: 30,
         lang: 666,
@@ -26,13 +35,7 @@ export default {
         qita3: "空军基地就",
       },
       {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "空军基地就",
-        qita2: "空军基地就",
-        qita3: "空军基地就",
-      }, {
+        id: 2,
         name: 222,
         age: 30,
         lang: 666,
@@ -40,6 +43,7 @@ export default {
         qita2: "空军基地就",
         qita3: "空军基地就",
       }, {
+        id: 3,
         name: 222,
         age: 30,
         lang: 666,
@@ -47,6 +51,7 @@ export default {
         qita2: "空军基地就",
         qita3: "空军基地就",
       }, {
+        id: 4,
         name: 222,
         age: 30,
         lang: 666,
@@ -54,6 +59,15 @@ export default {
         qita2: "空军基地就",
         qita3: "空军基地就",
       }, {
+        id: 5,
+        name: 222,
+        age: 30,
+        lang: 666,
+        qita1: "空军基地就",
+        qita2: "空军基地就",
+        qita3: "空军基地就",
+      }, {
+        id: 6,
         name: 222,
         age: 30,
         lang: 666,
@@ -62,6 +76,7 @@ export default {
         qita3: "空军基地就",
       },
       {
+        id: 7,
         name: 222,
         age: 30,
         lang: 666,
@@ -70,6 +85,7 @@ export default {
         qita3: "空军基地就",
       },
       {
+        id: 8,
         name: 222,
         age: 30,
         lang: 666,
@@ -78,6 +94,7 @@ export default {
         qita3: "空军基地就",
       },
       {
+        id: 9,
         name: 222,
         age: 30,
         lang: 666,
@@ -86,6 +103,7 @@ export default {
         qita3: "空军基地就",
       },
       {
+        id: 10,
         name: 222,
         age: 30,
         lang: 666,
@@ -94,6 +112,7 @@ export default {
         qita3: "空军基地就",
       },
       {
+        id: 11,
         name: 222,
         age: 30,
         lang: 666,
@@ -102,14 +121,7 @@ export default {
         qita3: "空军基地就",
       },
       {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "空军基地就",
-        qita2: "空军基地就",
-        qita3: "空军基地就",
-      },
-      {
+        id: 12,
         name: 222,
         age: 30,
         lang: 666,
@@ -118,6 +130,7 @@ export default {
         qita3: "++++++++++++",
       },
       {
+        id: 13,
         name: 222,
         age: 30,
         lang: 666,
@@ -126,134 +139,7 @@ export default {
         qita3: "++++++++++++",
       },
       {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
-        name: 222,
-        age: 30,
-        lang: 666,
-        qita1: "++++++++++++",
-        qita2: "++++++++++++",
-        qita3: "++++++++++++",
-      },
-      {
+        id: 14,
         name: 222,
         age: 30,
         lang: 666,
@@ -289,6 +175,5 @@ export default {
       }],
     }
   },
-  computed: {},
 }
 </script>

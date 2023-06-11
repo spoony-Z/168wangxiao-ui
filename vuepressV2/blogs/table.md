@@ -121,6 +121,14 @@
 
 可选值：true | false
 
+## drag 是否列拖拽
+
+类型：Boolean
+
+默认值：false
+
+可选值：true | false
+
 ## paging：自定义分页
 
 :::tip 演示

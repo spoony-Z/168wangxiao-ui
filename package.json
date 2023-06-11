@@ -31,6 +31,7 @@
     "dependencies": {
         "core-js": "^3.6.5",
         "element-ui": "^2.15.13",
+        "sortablejs": "^1.15.0",
         "ts-tool-list": "^1.0.7",
         "vue": "^2.6.11"
     },

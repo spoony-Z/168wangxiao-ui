@@ -6,36 +6,21 @@
       </div>
       <div>
         <slot name="table-right-btn"></slot>
-        <el-button
-          icon="el-icon-setting"
-          size="small"
-          @click="dialogVisible = true"
-          >自定义列</el-button
-        >
+        <el-button icon="el-icon-setting" size="small" @click="dialogVisible = true">自定义列</el-button>
       </div>
     </div>
-    <el-table
-      ref="table"
-      :data="tempData"
-      :header-cell-style="headerCellStyle"
-      :cell-style="cellStyle"
-      v-bind="$attrs"
-      v-on="$listeners"
-    >
+    <el-table ref="table" :data="tempData" :header-cell-style="headerCellStyle" :cell-style="cellStyle" v-bind="$attrs"
+      v-on="$listeners">
       <template v-if="$slots.append" slot="append">
         <slot name="append"></slot>
       </template>
       <template v-for="item in copyColumns">
-        <el-table-column
-          v-if="item.type && ['selection', 'index'].includes(item.type)"
-          :key="`${item.prop}-if`"
-          v-bind="item"
-        >
+        <el-table-column v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
+          v-bind="item">
           <template #header="scope">
             <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
           </template>
         </el-table-column>
-
         <el-table-column v-else :key="item.prop" v-bind="item">
           <template #header="scope">
             <span v-if="$scopedSlots[`header-${item.prop}`]">
@@ -54,29 +39,14 @@
     </el-table>
     <div v-if="showPagination">
       <!-- 前端根据数据分页 -->
-      <el-pagination
-        v-if="frontendPaging && !$scopedSlots[`paging`]"
-        class="pagination"
-        v-bind="tempPagination"
-        :current-page="currentPage"
-        :page-size="fontPageSize"
-        :total="fontTotal"
-        @size-change="frontSizeChange"
-        @current-change="frontCurrentChange"
-      ></el-pagination>
+      <el-pagination v-if="frontendPaging && !$scopedSlots[`paging`]" class="pagination" v-bind="tempPagination"
+        :current-page="currentPage" :page-size="fontPageSize" :total="fontTotal" @size-change="frontSizeChange"
+        @current-change="frontCurrentChange"></el-pagination>
 
       <!-- 后端分页 -->
-      <el-pagination
-        class="pagination"
-        v-else-if="!frontendPaging && !$scopedSlots[`paging`]"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="endPage.currentPage"
-        :page-sizes="pageSizes"
-        :page-size="endPage.pageSize"
-        :layout="layout"
-        :total="endPage.total"
-      >
+      <el-pagination class="pagination" v-else-if="!frontendPaging && !$scopedSlots[`paging`]"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="endPage.currentPage"
+        :page-sizes="pageSizes" :page-size="endPage.pageSize" :layout="layout" :total="endPage.total">
       </el-pagination>
 
       <!-- 自定义分页 -->
@@ -96,11 +66,7 @@
           <span> <el-checkbox disabled>多选项</el-checkbox></span>
         </div>
         <el-checkbox-group v-model="checkList">
-          <el-checkbox
-            v-for="(item, index) in columns"
-            :key="index"
-            :label="item.prop"
-          >
+          <el-checkbox v-for="(item, index) in columns" :key="index" :label="item.prop">
             <el-tooltip placement="top" effect="light">
               <span slot="content">{{ item.label }}</span>
               <span class="isEllipsis">{{ item.label }}</span>
@@ -110,14 +76,13 @@
       </el-card>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false" size="small">取 消</el-button>
-        <el-button type="primary" @click="determine" size="small"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="determine" size="small">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 <script>
+import Sortable from 'sortablejs';
 const defaultPagination = {
   background: true,
   layout: "total, sizes, prev, pager, next, jumper",
@@ -202,6 +167,12 @@ export default {
       default: false,
       type: Boolean,
     },
+
+    /** 是否拖拽 */
+    drag: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -211,6 +182,9 @@ export default {
       dialogVisible: false,
       checkList: [],
       copyColumns: [],
+      /** 拖拽 */
+      oldList: [],
+      newList: [],
     };
   },
   computed: {
@@ -265,6 +239,18 @@ export default {
     }
     this.processingColum();
     this.determine();
+    if (this.drag) {
+      this.oldList = JSON.parse(JSON.stringify(this.copyColumns))
+      this.newList = JSON.parse(JSON.stringify(this.copyColumns))
+      this.columnDrop()
+      this.rowDrop()
+    }
+
+    // 阻止默认行为
+    document.body.ondrop = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    };
   },
   methods: {
     /**
@@ -315,6 +301,34 @@ export default {
       this.copyColumns = add;
       this.$refs.table.doLayout();
     },
+
+    // 行拖拽
+    rowDrop() {
+      // 此时找到的元素是要拖拽元素的父容器
+      const tbody = document.querySelector('.el-table__body-wrapper tbody');
+      const _this = this;
+      Sortable.create(tbody, {
+        //  指定父元素下可被拖拽的子元素
+        draggable: ".el-table__row",
+        onEnd({ newIndex, oldIndex }) {
+          const currRow = _this.tempData.splice(oldIndex, 1)[0];
+          _this.tempData.splice(newIndex, 0, currRow);
+        }
+      });
+    },
+    // 列拖拽
+    columnDrop() {
+      const wrapperTr = document.querySelector('.el-table__header-wrapper tr');
+      this.sortable = Sortable.create(wrapperTr, {
+        animation: 180,
+        delay: 0,
+        onEnd: evt => {
+          const oldItem = this.newList[evt.oldIndex];
+          this.newList.splice(evt.oldIndex, 1);
+          this.newList.splice(evt.newIndex, 0, oldItem);
+        }
+      });
+    },
   },
 };
 </script>
@@ -332,32 +346,32 @@ export default {
   font-weight: bold;
 }
 
->>> .isEllipsis {
+>>>.isEllipsis {
   display: inline-block;
   width: 85px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
->>> .el-checkbox {
+>>>.el-checkbox {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   margin-right: 0px;
 }
 
->>> .el-checkbox-group {
+>>>.el-checkbox-group {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 20px;
 }
 
->>> .el-dialog__body {
+>>>.el-dialog__body {
   padding: 10px 20px 10px 20px;
 }
 
->>> .el-card__header {
+>>>.el-card__header {
   padding: 10px 20px;
 }
 </style>
