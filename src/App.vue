@@ -8,14 +8,9 @@
         <el-button>默认按钮</el-button>
       </template>
     </wangxiao-table>
-
-    <!-- <div class="draggable" style="padding: 20px">
-      <el-table row-key="id" :data="tableData" style="width: 100%" border>
-        <el-table-column v-for="(item, index) in oldList" :key="`col_${index}`" :prop="newList[index].prop"
-          :label="item.label" align="center">
-        </el-table-column>
-      </el-table>
-    </div> -->
+    <Wangxiao-sidebar>
+      
+    </Wangxiao-sidebar>
   </div>
 </template>
 
