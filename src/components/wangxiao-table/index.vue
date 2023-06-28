@@ -10,18 +10,18 @@
       </div>
     </div>
     <el-table ref="table" :data="tempData" :header-cell-style="headerCellStyle" :cell-style="cellStyle" v-bind="$attrs"
-      v-on="$listeners">
+      v-on="$listeners" border>
       <template v-if="$slots.append" slot="append">
         <slot name="append"></slot>
       </template>
       <template v-for="item in copyColumns">
-        <el-table-column v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
+        <el-table-column show-overflow-tooltip v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
           v-bind="item">
           <template #header="scope">
             <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
           </template>
         </el-table-column>
-        <el-table-column v-else :key="item.prop" v-bind="item">
+        <el-table-column v-else :key="item.prop" v-bind="item" show-overflow-tooltip>
           <template #header="scope">
             <span v-if="$scopedSlots[`header-${item.prop}`]">
               <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
@@ -32,7 +32,7 @@
             <span v-if="$scopedSlots[item.prop]">
               <slot :name="item.prop" :scope="scope" :item="item"></slot>
             </span>
-            <span v-else>{{ scope.row[item.prop] }}</span>
+            <span v-else >{{ scope.row[item.prop] }}</span>
           </template>
         </el-table-column>
       </template>

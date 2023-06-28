@@ -8,24 +8,25 @@
         <el-button>默认按钮</el-button>
       </template>
     </wangxiao-table>
-    <Wangxiao-sidebar>
-      
+    <Wangxiao-sidebar :name='name' v-model="name">
+      kdkdkdk
     </Wangxiao-sidebar>
   </div>
 </template>
 
 <script>
-
+import assblay from "./assblay";
 export default {
   name: 'App',
   data() {
     return {
+      name: 'Demi',
       data: [{
         id: 1,
         name: 222,
         age: 30,
         lang: 666,
-        qita1: "空军基地就",
+        qita1: "空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就",
         qita2: "空军基地就",
         qita3: "空军基地就",
       },
@@ -169,6 +170,14 @@ export default {
         label: "其他3"
       }],
     }
+  },
+  watch: {
+    name(val) {
+      console.log(val);
+    }
+  },
+  created(){
+    console.log(assblay)
   },
 }
 </script>
