@@ -15,7 +15,7 @@
         <slot name="append"></slot>
       </template>
       <template v-for="item in copyColumns">
-        <el-table-column show-overflow-tooltip v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
+        <el-table-column v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
           v-bind="item">
           <template #header="scope">
             <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
