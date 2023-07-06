@@ -203,6 +203,10 @@ export default {
     data: {
       handler() {
         this.tempData = this.data;
+        const that = this
+        this.$nextTick(() => {
+          that.$refs.table.doLayout();
+        })
       },
       deep: true,
       immediate: true,
@@ -231,6 +235,10 @@ export default {
     },
   },
   mounted() {
+    const that = this
+    this.$nextTick(() => {
+      that.$refs.table.doLayout();
+    })
     const tempStore = this.$refs?.table || {};
     for (const key in tempStore) {
       if (typeof tempStore[key] === "function") {
@@ -373,5 +381,8 @@ export default {
 
 >>>.el-card__header {
   padding: 10px 20px;
+}
+/deep/.el-table--border th.gutter:last-of-type {
+    display: table-cell !important;
 }
 </style>
