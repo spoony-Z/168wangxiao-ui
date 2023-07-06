@@ -21,7 +21,7 @@
             <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
           </template>
         </el-table-column>
-        <el-table-column v-else :key="item.prop" v-bind="item" show-overflow-tooltip>
+        <el-table-column v-else :key="item.prop" v-bind="item" :show-overflow-tooltip="$scopedSlots[item.prop]? false: true">
           <template #header="scope">
             <span v-if="$scopedSlots[`header-${item.prop}`]">
               <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
@@ -32,7 +32,7 @@
             <span v-if="$scopedSlots[item.prop]">
               <slot :name="item.prop" :scope="scope" :item="item"></slot>
             </span>
-            <span v-else >{{ scope.row[item.prop] }}</span>
+            <span v-else>{{ scope.row[item.prop] }}</span>
           </template>
         </el-table-column>
       </template>
@@ -66,7 +66,7 @@
           <span> <el-checkbox disabled>多选项</el-checkbox></span>
         </div>
         <el-checkbox-group v-model="checkList">
-          <el-checkbox v-for="(item, index) in columns" :key="index" :label="item.prop">
+          <el-checkbox v-for="(item, index) in columns" :key="index" :label="item.prop" :disabled="item.showDisable">
             <el-tooltip placement="top" effect="light">
               <span slot="content">{{ item.label }}</span>
               <span class="isEllipsis">{{ item.label }}</span>
@@ -132,7 +132,6 @@ export default {
       type: Object,
       default: () => ({}),
     },
-
     /** 后端分页 */
     BackendPaging: {
       type: Boolean,
@@ -161,13 +160,11 @@ export default {
       },
       type: String,
     },
-
     /** 是否显示自定义列 */
     showColumns: {
       default: false,
       type: Boolean,
     },
-
     /** 是否拖拽 */
     drag: {
       type: Boolean,
@@ -213,7 +210,11 @@ export default {
     },
     columns: {
       handler() {
-        this.copyColumns = this.columns;
+        this.$nextTick(() => {
+          this.copyColumns = this.columns;
+          this.processingColum();
+          this.determine();
+        })
       },
       deep: true,
       immediate: true,
@@ -245,8 +246,6 @@ export default {
         this[key] = tempStore[key];
       }
     }
-    this.processingColum();
-    this.determine();
     if (this.drag) {
       this.oldList = JSON.parse(JSON.stringify(this.copyColumns))
       this.newList = JSON.parse(JSON.stringify(this.copyColumns))
@@ -382,7 +381,8 @@ export default {
 >>>.el-card__header {
   padding: 10px 20px;
 }
+
 /deep/.el-table--border th.gutter:last-of-type {
-    display: table-cell !important;
+  display: table-cell !important;
 }
 </style>
