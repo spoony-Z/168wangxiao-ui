@@ -21,7 +21,25 @@
             <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
           </template>
         </el-table-column>
-        <el-table-column v-else :key="item.prop" v-bind="item" :show-overflow-tooltip="$scopedSlots[item.prop]? false: true">
+        <el-table-column v-else-if="item.children && item.children.length !== 0" :key="item.prop" v-bind="item"
+          :show-overflow-tooltip="$scopedSlots[item.prop] ? false : true">
+          <el-table-column v-for="t in item.children" :key="t.prop" v-bind="t" :show-overflow-tooltip="$scopedSlots[t.prop] ? false : true">
+          <template #header="scope">
+            <span v-if="$scopedSlots[`header-${t.prop}`]">
+              <slot :name="`header-${t.prop}`" v-bind="scope"></slot>
+            </span>
+            <span v-else>{{ scope.column.label }}</span>
+          </template>
+          <template slot-scope="scope">
+            <span v-if="$scopedSlots[t.prop]">
+              <slot :name="t.prop" :scope="scope" :item="t"></slot>
+            </span>
+            <span v-else>{{ scope.row[t.prop] }}</span>
+          </template>
+        </el-table-column>
+        </el-table-column>
+        <el-table-column v-else :key="item.prop" v-bind="item"
+          :show-overflow-tooltip="$scopedSlots[item.prop] ? false : true">
           <template #header="scope">
             <span v-if="$scopedSlots[`header-${item.prop}`]">
               <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
@@ -32,7 +50,9 @@
             <span v-if="$scopedSlots[item.prop]">
               <slot :name="item.prop" :scope="scope" :item="item"></slot>
             </span>
-            <span v-else>{{ scope.row[item.prop] }}</span>
+            <span v-else>
+            <el-table-column prop="jsjsjs"></el-table-column>
+            </span>
           </template>
         </el-table-column>
       </template>

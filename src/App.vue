@@ -3,12 +3,17 @@
     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
       <el-tab-pane v-for="item in tabl" :label="item.name" :key="item.id" :name="item.id">
         <wangxiao-table drag row-key="id" :data="data" :columns="tablist" showColumns :frontendPaging="true">
+          <!-- <template #age="{scope}">
+            <span>{{ scope.row }}</span>
+          </template> -->
         </wangxiao-table>
       </el-tab-pane>
     </el-tabs>
-    <!-- <Wangxiao-sidebar :name='name' v-model="name">
+    <Wangxiao-sidebar :name='name' v-model="name">
       kdkdkdk
-    </Wangxiao-sidebar> -->
+    </Wangxiao-sidebar>
+
+    <!-- 倒计时 -->
   </div>
 </template>
 

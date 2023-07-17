@@ -146,7 +146,7 @@ export default {
 
   render(h) {
     let that = this
-    return h('input', {
+    return h('el-input', {
       domProps: {
         value: that.name
       },

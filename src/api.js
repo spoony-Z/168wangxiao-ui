@@ -213,15 +213,22 @@ export const columns = [{
         width: 300,
     },
     {
-        prop: "age",
         label: "年龄",
         show: true,
         width: 300,
-    },
-    {
-        prop: "lang",
-        label: "升高",
-        width: 300,
+        children: [{
+          prop: "age",
+          label: "年龄",
+          show: true,
+          width: 300,
+        },
+        {
+          prop: "lang",
+          label: "年龄111",
+          show: true,
+          width: 300,
+        },
+      ]
     },
     {
         prop: "qita1",
@@ -392,13 +399,14 @@ export const columns3 = [{
         prop: "qita8",
         label: "其他8",
         width: 300,
-        showDisable: true
+        showDisable: true,
     },
     {
         prop: "qita9",
         label: "其他9",
         width: 300,
-        fixed: 'right'
+        fixed: 'right',
+        showDisable: true
     }
 ]
 
