@@ -213,20 +213,33 @@ export const columns = [{
         width: 300,
     },
     {
-        label: "年龄",
+        label: "一级",
         show: true,
         width: 300,
         children: [{
           prop: "age",
-          label: "年龄",
+          label: "二级",
           show: true,
           width: 300,
         },
         {
           prop: "lang",
-          label: "年龄111",
+          label: "二级",
           show: true,
           width: 300,
+          children: [{
+            prop: "age",
+            label: "三级",
+            show: true,
+            width: 300,
+          },
+          {
+            prop: "lang",
+            label: "三级",
+            show: true,
+            width: 300,
+          },
+        ]
         },
       ]
     },

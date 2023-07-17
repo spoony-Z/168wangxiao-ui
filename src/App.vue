@@ -9,9 +9,9 @@
         </wangxiao-table>
       </el-tab-pane>
     </el-tabs>
-    <Wangxiao-sidebar :name='name' v-model="name">
+    <!-- <Wangxiao-sidebar :name='name' v-model="name">
       kdkdkdk
-    </Wangxiao-sidebar>
+    </Wangxiao-sidebar> -->
 
     <!-- 倒计时 -->
   </div>
