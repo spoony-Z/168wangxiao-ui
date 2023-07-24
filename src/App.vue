@@ -19,10 +19,12 @@
 import assblay from "./assblay";
 import { data, columns, columns2, columns3, tabl } from "./api";
 import wangxiaoTable1 from "./components/wangxiao-table";
+import wangxiaoStep from "./components/wangxiao-step";
 export default {
   name: 'App',
   components: {
-    wangxiaoTable1
+    wangxiaoTable1,
+    wangxiaoStep,
   },
   data() {
     return {
@@ -59,8 +61,9 @@ export default {
       count: 2,
       list: [
         {
-          name: "论文选题",
           id: 1,
+          prop: 'ssd',
+          name: "论文选题",
         },
         {
           name: "选题审核",

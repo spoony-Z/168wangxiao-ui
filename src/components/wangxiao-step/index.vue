@@ -4,7 +4,10 @@
     <div class="right">
       <div class="nav-div" v-for="(item, index) in dataList" :key="index">
         <div class="item-nav" :class="{ active: item['have-class'] }">
-          <div>{{ item.name }}</div>
+          <div v-if="$slots[item.prop]">
+            <slot :name="item.prop" v-bind="item"></slot>
+          </div>
+          <div v-else>{{ item.name }}</div>
         </div>
         <div v-if="index !== list.length - 1" class="nav-middle-line" :class="{ active: item['have-class'] }"></div>
       </div>
