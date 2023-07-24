@@ -5,12 +5,15 @@ import 'element-ui/lib/theme-chalk/index.css';
 import wangXiaoUi from "./index";
 
 /** 工具的使用 */
-// import { testA } from 'ts-tool-list';
-// console.log(testA());
+import { arrJudge } from 'ts-tool-list';
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(wangXiaoUi);
+
+/** 挂载方法 */
+/** 判断是否为数组（不包含空数组） */
+Vue.prototype.arrJudge = arrJudge;
 
 new Vue({
     render: h => h(App),

@@ -2,14 +2,14 @@
   <div id="app">
     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
       <el-tab-pane v-for="item in tabl" :label="item.name" :key="item.id" :name="item.id">
-        <wangxiao-table1 :key="activeName" drag row-key="id" :data="data" :columns="tablist" showColumns :frontendPaging="true"></wangxiao-table1>
+        <wangxiao-table1 :key="activeName" drag row-key="id" :data="data" :columns="tablist" showColumns
+          :frontendPaging="true"></wangxiao-table1>
         <!-- <wangxiao-table1 drag row-key="id" :data="data" :columns="columns2" showColumns :frontendPaging="true"></wangxiao-table1>
         <wangxiao-table1 drag row-key="id" :data="data" :columns="columns3" showColumns :frontendPaging="true"></wangxiao-table1> -->
       </el-tab-pane>
     </el-tabs>
-    <!-- <Wangxiao-sidebar :name='name' v-model="name">
-      kdkdkdk
-    </Wangxiao-sidebar> -->
+    <Wangxiao-sidebar :sideList="semesterList"></Wangxiao-sidebar>
+    <wangxiaoStep :count="count" :list="list"></wangxiaoStep>
 
     <!-- 倒计时 -->
   </div>
@@ -34,6 +34,51 @@ export default {
       columns3,
       activeName: '1',
       tablist: [],
+      semesterList: [
+        {
+          state: 1,
+          name: "第一学期",
+        },
+        {
+          state: 0,
+          name: "第二学期",
+        },
+        {
+          state: 0,
+          name: "第三学期",
+        },
+        {
+          state: 0,
+          name: "第四学期",
+        },
+        {
+          state: 0,
+          name: "第五学期",
+        },
+      ],
+      count: 2,
+      list: [
+        {
+          name: "论文选题",
+          id: 1,
+        },
+        {
+          name: "选题审核",
+          id: 2,
+        },
+        {
+          name: "论文提交",
+          id: 3,
+        },
+        {
+          name: "论文审核",
+          id: 4,
+        },
+        {
+          name: "答辩成绩",
+          id: 5,
+        },
+      ],
     }
   },
   watch: {
