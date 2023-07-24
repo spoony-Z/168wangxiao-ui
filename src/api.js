@@ -429,14 +429,10 @@ export const tabl = [{
     },
     {
         id: '2',
-        name: "第一"
+        name: "第二"
     },
     {
         id: '3',
-        name: "第一"
-    },
-    {
-        id: '4',
-        name: "第一"
+        name: "第三"
     },
 ]
