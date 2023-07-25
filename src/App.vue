@@ -8,7 +8,11 @@
         <wangxiao-table1 drag row-key="id" :data="data" :columns="columns3" showColumns :frontendPaging="true"></wangxiao-table1> -->
       </el-tab-pane>
     </el-tabs>
-    <Wangxiao-sidebar :sideList="semesterList"></Wangxiao-sidebar>
+    <Wangxiao-sidebar :sideList="semesterList" label="names" prop="fieldName">
+      <template #aaa>
+        <span>ififififi</span>
+      </template>
+    </Wangxiao-sidebar>
     <wangxiaoStep :count="count" :list="list"></wangxiaoStep>
     <WangxiaoUpload></WangxiaoUpload>
 
@@ -40,23 +44,28 @@ export default {
       semesterList: [
         {
           state: 1,
-          name: "第一学期",
+          names: "第一学期",
+          fieldName: 'aaa'
         },
         {
           state: 0,
-          name: "第二学期",
+          names: "第二学期",
+          fieldName: 'bbb'
         },
         {
           state: 0,
-          name: "第三学期",
+          names: "第三学期",
+          fieldName: 'ccc'
         },
         {
           state: 0,
-          name: "第四学期",
+          names: "第四学期",
+          fieldName: 'ddd'
         },
         {
           state: 0,
-          name: "第五学期",
+          names: "第五学期",
+          fieldName: 'ggg'
         },
       ],
       count: 2,

@@ -1,8 +1,11 @@
 <template>
   <el-card shadow="never" class="box-card">
-    <div v-for="(item, index) in semesterList" :key="item.key" class="list" :value="item.key"
-      :class="{ active: activeTemp === index }" @click="handleClick(index)">
-      {{ item.name }}
+    <div v-for="(item, index) in semesterList" :key="index" class="list"
+      :class="{ active: activeTemp === index }" @click="handleClick(index, item)">
+      <template v-if="$scopedSlots[item[prop]]">
+        <slot :name="item[prop]" :scope="item" :index="index"></slot>
+      </template>
+      <div v-else>{{ item[label] }}</div>
     </div>
   </el-card>
 </template>
@@ -21,6 +24,16 @@ export default {
       type: Array,
       default: () => [],
       required: true,
+    },
+    /** 渲染的字段名 默认为 name */
+    label: {
+      type: String,
+      default: 'name',
+    },
+    /** 具名插槽 字段名 */
+    prop: {
+      type: String,
+      default: '',
     }
   },
   data() {
@@ -41,9 +54,9 @@ export default {
     }
   },
   methods: {
-    handleClick(e) {
+    handleClick(e, item) {
       this.activeTemp = e;
-      this.activeName = "first";
+      this.$emit("chenage", e, item)
     },
   },
 };

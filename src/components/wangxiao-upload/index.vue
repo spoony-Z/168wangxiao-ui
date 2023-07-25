@@ -149,15 +149,15 @@ export default {
   /* padding: 20px; */
 }
 
-img {
-  width: 100%;
+.delete-icon img {
+  width: 75%;
   height: 100%;
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.img2 {
+.delete-icon .img2 {
   opacity: 0;
 }
 
