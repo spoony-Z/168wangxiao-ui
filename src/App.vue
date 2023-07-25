@@ -10,6 +10,7 @@
     </el-tabs>
     <Wangxiao-sidebar :sideList="semesterList"></Wangxiao-sidebar>
     <wangxiaoStep :count="count" :list="list"></wangxiaoStep>
+    <WangxiaoUpload></WangxiaoUpload>
 
     <!-- 倒计时 -->
   </div>
