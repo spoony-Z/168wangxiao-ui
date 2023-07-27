@@ -1,11 +1,16 @@
 import { navbar } from "vuepress-theme-hope";
 
 export default navbar([
-  "/",
+  // "/",
+  {
+    text: "首页",
+    icon: "book",
+    link: "/"
+  },
   "/demo/",
   {
     text: "指南",
-    icon: "lightbulb",
+    icon: "home",
     prefix: "/guide/",
     children: [
       {
