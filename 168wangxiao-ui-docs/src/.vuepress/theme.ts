@@ -18,11 +18,11 @@ export default hopeTheme({
 
   docsDir: "src",
 
-  // navbar
   navbar,
 
-  // sidebar
   sidebar,
+  /** 顶部导航栏布局设置 */
+  navbarLayout: { start: ["Brand"], center: [], end: ["Links","Language", "Repo", "Outlook", "Search"] },
 
   footer: "默认页脚",
 

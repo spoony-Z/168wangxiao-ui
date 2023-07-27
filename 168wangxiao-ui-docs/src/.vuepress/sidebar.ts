@@ -4,18 +4,24 @@ export default sidebar({
   "/": [
     "",
     {
-      text: "案例",
-      icon: "laptop-code",
-      prefix: "demo/",
-      link: "demo/",
-      children: "structure",
-    },
-    {
-      text: "文档",
+      text: "组件",
       icon: "book",
-      prefix: "guide/",
+      prefix: "blogs/",
       children: "structure",
     },
-    "slides",
+    // {
+    //   text: "案例",
+    //   icon: "laptop-code",
+    //   prefix: "demo/",
+    //   link: "demo/",
+    //   children: "structure",
+    // },
+    // {
+    //   text: "文档",
+    //   icon: "book",
+    //   prefix: "guide/",
+    //   children: "structure",
+    // },
+    // "slides",
   ],
 });

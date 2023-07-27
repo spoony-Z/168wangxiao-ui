@@ -4,12 +4,14 @@ specifiers:
   '@vuepress/client': 2.0.0-beta.66
   vue: ^3.2.47
   vuepress: 2.0.0-beta.66
+  vuepress-plugin-search-pro: 2.0.0-beta.233
   vuepress-theme-hope: 2.0.0-beta.233
 
 devDependencies:
   '@vuepress/client': registry.npmmirror.com/@vuepress/client/2.0.0-beta.66
   vue: registry.npmmirror.com/vue/3.3.4
   vuepress: registry.npmmirror.com/vuepress/2.0.0-beta.66_bqx2l6y65ojoyvwe2djue26wjy
+  vuepress-plugin-search-pro: registry.npmmirror.com/vuepress-plugin-search-pro/2.0.0-beta.233_vuepress@2.0.0-beta.66
   vuepress-theme-hope: registry.npmmirror.com/vuepress-theme-hope/2.0.0-beta.233_vuepress@2.0.0-beta.66
 
 packages:
@@ -2007,7 +2009,7 @@ packages:
     engines: {node: '>= 14'}
     dependencies:
       '@mdit/plugin-tex': registry.npmmirror.com/@mdit/plugin-tex/0.4.8
-      '@types/katex': registry.npmmirror.com/@types/katex/0.16.1
+      '@types/katex': registry.npmmirror.com/@types/katex/0.16.2
       '@types/markdown-it': registry.npmmirror.com/@types/markdown-it/12.2.3
       katex: registry.npmmirror.com/katex/0.16.8
       markdown-it: registry.npmmirror.com/markdown-it/13.0.1
@@ -2258,10 +2260,10 @@ packages:
       '@types/node': registry.npmmirror.com/@types/node/20.4.5
     dev: true
 
-  registry.npmmirror.com/@types/katex/0.16.1:
-    resolution: {integrity: sha512-cwglq2A63Yk082CQk0t8LIoDhZAVgJqkumLyk3grpg3K8sevaDW//Qsspmxj9Sf+97biqt79CfAlPrvizHlP0w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/katex/-/katex-0.16.1.tgz}
+  registry.npmmirror.com/@types/katex/0.16.2:
+    resolution: {integrity: sha512-dHsSjSlU/EWEEbeNADr3FtZZOAXPkFPUO457QCnoNqcZQXNqNEu/svQd0Nritvd3wNff4vvC/f4e6xgX3Llt8A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/katex/-/katex-0.16.2.tgz}
     name: '@types/katex'
-    version: 0.16.1
+    version: 0.16.2
     dev: true
 
   registry.npmmirror.com/@types/linkify-it/3.0.2:
@@ -6547,6 +6549,12 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
+  registry.npmmirror.com/slimsearch/1.0.0:
+    resolution: {integrity: sha512-ig1Du+U5LFngeDokhUupBqmEz3aKRJ4v+R2t6ZOi3aPGaFivYxxOiDcJX7fR0xPxjmTe94rAA6RW5gKlX5Gcsg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/slimsearch/-/slimsearch-1.0.0.tgz}
+    name: slimsearch
+    version: 1.0.0
+    dev: true
+
   registry.npmmirror.com/source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map-js/-/source-map-js-1.0.2.tgz}
     name: source-map-js
@@ -7619,6 +7627,44 @@ packages:
       chokidar: registry.npmmirror.com/chokidar/3.5.3
       sass: registry.npmmirror.com/sass/1.64.1
       vuepress: registry.npmmirror.com/vuepress/2.0.0-beta.66_bqx2l6y65ojoyvwe2djue26wjy
+      vuepress-shared: registry.npmmirror.com/vuepress-shared/2.0.0-beta.233_vuepress@2.0.0-beta.66
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - supports-color
+    dev: true
+
+  registry.npmmirror.com/vuepress-plugin-search-pro/2.0.0-beta.233_vuepress@2.0.0-beta.66:
+    resolution: {integrity: sha512-mCnnq0YkBxwJqlUJJIj+offtOq1yHN0qj3NRGiGSj4q41WSvKwodU2yHaT/1beLmfCN4nH55MTPxsuhwrBD/Dg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuepress-plugin-search-pro/-/vuepress-plugin-search-pro-2.0.0-beta.233.tgz}
+    id: registry.npmmirror.com/vuepress-plugin-search-pro/2.0.0-beta.233
+    name: vuepress-plugin-search-pro
+    version: 2.0.0-beta.233
+    engines: {node: '>=16.19.0', npm: '>=8', pnpm: '>=7'}
+    peerDependencies:
+      sass-loader: ^13.3.2
+      vuepress: 2.0.0-beta.66
+      vuepress-vite: 2.0.0-beta.66
+      vuepress-webpack: 2.0.0-beta.66
+    peerDependenciesMeta:
+      sass-loader:
+        optional: true
+      vuepress:
+        optional: true
+      vuepress-vite:
+        optional: true
+      vuepress-webpack:
+        optional: true
+    dependencies:
+      '@vuepress/client': registry.npmmirror.com/@vuepress/client/2.0.0-beta.66
+      '@vuepress/shared': registry.npmmirror.com/@vuepress/shared/2.0.0-beta.66
+      '@vuepress/utils': registry.npmmirror.com/@vuepress/utils/2.0.0-beta.66
+      '@vueuse/core': registry.npmmirror.com/@vueuse/core/10.2.1_vue@3.3.4
+      cheerio: registry.npmmirror.com/cheerio/1.0.0-rc.12
+      chokidar: registry.npmmirror.com/chokidar/3.5.3
+      slimsearch: registry.npmmirror.com/slimsearch/1.0.0
+      vue: registry.npmmirror.com/vue/3.3.4
+      vue-router: registry.npmmirror.com/vue-router/4.2.4_vue@3.3.4
+      vuepress: registry.npmmirror.com/vuepress/2.0.0-beta.66_bqx2l6y65ojoyvwe2djue26wjy
+      vuepress-plugin-sass-palette: registry.npmmirror.com/vuepress-plugin-sass-palette/2.0.0-beta.233_vuepress@2.0.0-beta.66
       vuepress-shared: registry.npmmirror.com/vuepress-shared/2.0.0-beta.233_vuepress@2.0.0-beta.66
     transitivePeerDependencies:
       - '@vue/composition-api'
