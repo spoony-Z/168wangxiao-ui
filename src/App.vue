@@ -15,6 +15,7 @@
     </Wangxiao-sidebar>
     <wangxiaoStep :count="count" :list="list"></wangxiaoStep>
     <WangxiaoUpload></WangxiaoUpload>
+    <wangxiao-editor></wangxiao-editor>
 
     <!-- 倒计时 -->
   </div>

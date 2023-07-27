@@ -3,9 +3,10 @@ import WangxiaoBtn from "./components/wangxiao-btn/index.js";
 import WangxiaoSidebar from "./components/wangxiao-sidebar/index.js";
 import WangxiaoStep from "./components/wangxiao-step/index.js";
 import WangxiaoUpload from "./components/wangxiao-upload/index.js";
+import WangxiaoEditor from "./components/wangxiao-editor/index.js";
 
 // 组件
-const components = [WangxiaoTable, WangxiaoBtn, WangxiaoSidebar, WangxiaoStep, WangxiaoUpload];
+const components = [WangxiaoTable, WangxiaoBtn, WangxiaoSidebar, WangxiaoStep, WangxiaoUpload, WangxiaoEditor];
 
 // 指令
 // const directives = [xxxx]
@@ -31,7 +32,7 @@ const install = Vue => {
 if (typeof window !== "undefined" && window.Vue) {
     install(window.Vue);
 }
-export { WangxiaoTable, WangxiaoBtn, WangxiaoSidebar, WangxiaoStep, WangxiaoUpload } // 按需引入 导出
+export { WangxiaoTable, WangxiaoBtn, WangxiaoSidebar, WangxiaoStep, WangxiaoUpload, WangxiaoEditor } // 按需引入 导出
 export default {
     install,
     // 所有组件，必须具有 install 方法才能使用 Vue.use()
