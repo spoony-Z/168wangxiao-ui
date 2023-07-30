@@ -10,12 +10,12 @@ bgImageStyle:
 heroText: 168wangxiao-ui文档
 tagline: 一个基于element-ui二次封装的ui库。
 actions:
-  - text: 使用指南 💡
-    link: ./demo/
+  - text: 开始 👈
+    link: ./blogs/
     type: primary
 
-  - text: 联系作者
-    link: ./guide/
+  - text: 👉联系作者
+    link: ./slides.md
 
 highlights:
   # - header: 易于安装
