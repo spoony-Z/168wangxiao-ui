@@ -1,7 +1,6 @@
 ---
-title: author · SOBER · 杨胜军
-describe: fjsifjsifjesi
-icon: person-chalkboard
+title: author · SOBER & 杨胜军
+icon: like
 navbar: true
 sidebar: false
 
