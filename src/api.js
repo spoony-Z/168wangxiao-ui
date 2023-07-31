@@ -1,7 +1,7 @@
 export const data = [{
         id: 1,
         name: 222,
-        age: 30,
+        age: 1,
         lang: 666,
         qita1: "空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就空军基地就",
         qita2: "空军基地就",
@@ -16,7 +16,7 @@ export const data = [{
     {
         id: 2,
         name: 222,
-        age: 30,
+        age: 2,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -30,7 +30,7 @@ export const data = [{
     }, {
         id: 3,
         name: 222,
-        age: 30,
+        age: 3,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -44,7 +44,7 @@ export const data = [{
     }, {
         id: 4,
         name: 222,
-        age: 30,
+        age: 4,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -58,7 +58,7 @@ export const data = [{
     }, {
         id: 5,
         name: 222,
-        age: 30,
+        age: 5,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -72,7 +72,7 @@ export const data = [{
     }, {
         id: 6,
         name: 222,
-        age: 30,
+        age: 6,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -87,7 +87,7 @@ export const data = [{
     {
         id: 7,
         name: 222,
-        age: 30,
+        age: 7,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -102,7 +102,7 @@ export const data = [{
     {
         id: 8,
         name: 222,
-        age: 30,
+        age:8,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -117,7 +117,7 @@ export const data = [{
     {
         id: 9,
         name: 222,
-        age: 30,
+        age: 9,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -132,7 +132,7 @@ export const data = [{
     {
         id: 10,
         name: 222,
-        age: 30,
+        age: 10,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -147,7 +147,7 @@ export const data = [{
     {
         id: 11,
         name: 222,
-        age: 30,
+        age: 11,
         lang: 666,
         qita1: "空军基地就",
         qita2: "空军基地就",
@@ -162,7 +162,7 @@ export const data = [{
     {
         id: 12,
         name: 222,
-        age: 30,
+        age: 12,
         lang: 666,
         qita1: "++++++++++++",
         qita2: "++++++++++++",
@@ -177,7 +177,7 @@ export const data = [{
     {
         id: 13,
         name: 222,
-        age: 30,
+        age: 13,
         lang: 666,
         qita1: "++++++++++++",
         qita2: "++++++++++++",
@@ -192,7 +192,7 @@ export const data = [{
     {
         id: 14,
         name: 222,
-        age: 30,
+        age: 14,
         lang: 666,
         qita1: "++++++++++++",
         qita2: "++++++++++++",

@@ -15,20 +15,23 @@
         <slot name="append"></slot>
       </template>
       <template v-for="item in copyColumns">
-        <el-table-column header-align="center" v-if="item.type && ['selection', 'index'].includes(item.type)" :key="`${item.prop}-if`"
-          v-bind="item">
+        <el-table-column header-align="center" v-if="item.type && ['selection', 'index'].includes(item.type)"
+          :key="`${item.prop}-if`" v-bind="item">
           <template #header="scope">
             <slot :name="`header-${item.prop}`" v-bind="scope"></slot>
           </template>
         </el-table-column>
 
-        <el-table-column header-align="center" v-else-if="item.children && item.children.length !== 0" :key="item.prop" v-bind="item" :show-overflow-tooltip="$scopedSlots[item.prop] ? false : true">
+        <el-table-column header-align="center" v-else-if="item.children && item.children.length !== 0" :key="item.prop"
+          v-bind="item" :show-overflow-tooltip="$scopedSlots[item.prop] ? false : true">
 
-          <el-table-column header-align="center" v-for="t in item.children" :key="t.prop" v-bind="t" :show-overflow-tooltip="$scopedSlots[t.prop] ? false : true">
+          <el-table-column header-align="center" v-for="t in item.children" :key="t.prop" v-bind="t"
+            :show-overflow-tooltip="$scopedSlots[t.prop] ? false : true">
 
             <div v-if="t.children && t.children.length !== 0">
 
-              <el-table-column header-align="center" v-for="j in t.children" :key="j.prop" v-bind="j" :show-overflow-tooltip="$scopedSlots[j.prop] ? false : true">
+              <el-table-column header-align="center" v-for="j in t.children" :key="j.prop" v-bind="j"
+                :show-overflow-tooltip="$scopedSlots[j.prop] ? false : true">
 
                 <template #header="scope">
                   <span v-if="$scopedSlots[`header-${j.prop}`]">
@@ -44,19 +47,19 @@
                 </template>
               </el-table-column>
             </div>
-            
-              <template #header="scope">
-                <span v-if="$scopedSlots[`header-${t.prop}`]">
-                  <slot :name="`header-${t.prop}`" v-bind="scope"></slot>
-                </span>
-                <span v-else>{{ scope.column.label }}</span>
-              </template>
-              <template slot-scope="scope">
-                <span v-if="$scopedSlots[t.prop]">
-                  <slot :name="t.prop" :scope="scope" :item="t"></slot>
-                </span>
-                <span v-else>{{ scope.row[t.prop] }}</span>
-              </template>
+
+            <template #header="scope">
+              <span v-if="$scopedSlots[`header-${t.prop}`]">
+                <slot :name="`header-${t.prop}`" v-bind="scope"></slot>
+              </span>
+              <span v-else>{{ scope.column.label }}</span>
+            </template>
+            <template slot-scope="scope">
+              <span v-if="$scopedSlots[t.prop]">
+                <slot :name="t.prop" :scope="scope" :item="t"></slot>
+              </span>
+              <span v-else>{{ scope.row[t.prop] }}</span>
+            </template>
           </el-table-column>
         </el-table-column>
 
@@ -358,8 +361,10 @@ export default {
         //  指定父元素下可被拖拽的子元素
         draggable: ".el-table__row",
         onEnd({ newIndex, oldIndex }) {
+          const oldData = _this.tempData[newIndex]
           const currRow = _this.tempData.splice(oldIndex, 1)[0];
           _this.tempData.splice(newIndex, 0, currRow);
+          _this.$emit('dragRow', oldIndex, oldData, newIndex, currRow, _this.tempData)
         }
       });
     },
@@ -424,5 +429,4 @@ export default {
 
 /deep/.el-table--border th.gutter:last-of-type {
   display: table-cell !important;
-}
-</style>
+}</style>
