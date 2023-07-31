@@ -2,7 +2,7 @@
   <div id="app">
     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
       <el-tab-pane v-for="item in tabl" :label="item.name" :key="item.id" :name="item.id">
-        <wangxiao-table1 :key="activeName" drag row-key="id" :data="data" :columns="tablist" showColumns
+        <wangxiao-table1 @dragRow="dragRow" :key="activeName" drag row-key="id" :data="data" :columns="tablist" showColumns
           :frontendPaging="true"></wangxiao-table1>
         <!-- <wangxiao-table1 drag row-key="id" :data="data" :columns="columns2" showColumns :frontendPaging="true"></wangxiao-table1>
         <wangxiao-table1 drag row-key="id" :data="data" :columns="columns3" showColumns :frontendPaging="true"></wangxiao-table1> -->
@@ -125,6 +125,9 @@ export default {
       console.log(tab, event);
       this.$forceUpdate()
     },
+    dragRow(i1, i2, i3, i4, i5){
+      console.log(i1, i2, i3, i4, i5);
+    }
   }
 }
 </script>
