@@ -35,11 +35,11 @@ backtotop: false
   > - **谷歌邮箱：** shenjuny.1997@gmail.com
   > - **网易邮箱：** shenjun_y@yeah.net
 
-## 其他联系方式
+## 更多联系方式
 
+  > - **拼多多：** shenjuny.1997@gmail.com
   > - **和平精英：** 念之ん（微区）
   > - **球球大作战1：** 428428
   > - **球球大作战2：** 31111706
   > - **皮皮搞笑：** 4012683
-  > - **谷歌邮箱：** shenjuny.1997@gmail.com
   > - **网易邮箱：** shenjun_y@yeah.net
