@@ -2,3 +2,30 @@
 .vp-sidebar-link {
     border-radius: 0;
 }
+
+/** 隐藏代码行数 */
+
+div[class*=language-].line-numbers-mode pre {
+  margin-left: 0 !important;
+  padding-left: 20px;
+}
+
+div[class*=language-].line-numbers-mode::after {
+  display: none !important;
+}
+div[class*=language-].line-numbers-mode .line-numbers {
+  display: none;
+}
+
+.page .blog-info-wrapper .blogger-info {
+  background: url("/spoony-z/caihong.jpg") no-repeat fixed top / 100% 100%;
+}
+
+.blog-hero .description {
+  color: #000000
+}
+
+/** 代码块背景色 */
+div[class*=language-] {
+  // background-color: #909ea357;
+}
