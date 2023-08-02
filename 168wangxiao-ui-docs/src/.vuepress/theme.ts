@@ -48,6 +48,8 @@ export default hopeTheme({
       category: "Announcements",
       categoryId: "DIC_kwDOG_Pt2M4COD69",
     },
+    /** 关闭代码主题 */
+    // prismjs: false,
 
     // All features are enabled for demo, only preserve features you need here
     mdEnhance: {

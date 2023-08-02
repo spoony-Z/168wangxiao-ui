@@ -277,6 +277,22 @@ export default {
       immediate: true,
       deep: true,
     },
+    // drag: {
+    //   handler(val) {
+    //     var _that = this
+    //     if (val) {
+    //       this.$nextTick(() => {
+    //         console.log(val, "1111111");
+    //         _that.oldList = JSON.parse(JSON.stringify(_that.copyColumns))
+    //         _that.newList = JSON.parse(JSON.stringify(_that.copyColumns))
+    //         _that.columnDrop()
+    //         _that.rowDrop()
+    //       })
+    //     }
+    //   },
+    //   deep: true,
+    //   immediate: true,
+    // }
   },
   mounted() {
     const that = this
@@ -355,18 +371,20 @@ export default {
     // 行拖拽
     rowDrop() {
       // 此时找到的元素是要拖拽元素的父容器
-      const tbody = document.querySelector('.el-table__body-wrapper tbody');
       const _this = this;
-      Sortable.create(tbody, {
-        //  指定父元素下可被拖拽的子元素
-        draggable: ".el-table__row",
-        onEnd({ newIndex, oldIndex }) {
-          const oldData = _this.tempData[newIndex]
-          const currRow = _this.tempData.splice(oldIndex, 1)[0];
-          _this.tempData.splice(newIndex, 0, currRow);
-          _this.$emit('dragRow', oldIndex, oldData, newIndex, currRow, _this.tempData)
-        }
-      });
+        // const tbody = document.querySelector('.el-table__body-wrapper tbody');
+        const tbody = this.$refs.table.$el.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
+        console.log(tbody);
+        Sortable.create(tbody, {
+          //  指定父元素下可被拖拽的子元素
+          draggable: ".el-table__row",
+          onEnd({ newIndex, oldIndex }) {
+            const oldData = _this.tempData[newIndex]
+            const currRow = _this.tempData.splice(oldIndex, 1)[0];
+            _this.tempData.splice(newIndex, 0, currRow);
+            _this.$emit('dragRow', oldIndex, oldData, newIndex, currRow, _this.tempData)
+          }
+        });
     },
     // 列拖拽
     columnDrop() {
@@ -429,4 +447,5 @@ export default {
 
 /deep/.el-table--border th.gutter:last-of-type {
   display: table-cell !important;
-}</style>
+}
+</style>
