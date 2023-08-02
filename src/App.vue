@@ -16,6 +16,11 @@
     <wangxiaoStep :count="count" :list="list"></wangxiaoStep>
     <WangxiaoUpload></WangxiaoUpload>
     <wangxiao-editor></wangxiao-editor>
+    <wangxiaoRender age="111111" @chenage="onChenage" >
+      <template #ages>
+        打卡打卡打卡打卡
+      </template>
+    </wangxiaoRender>
 
     <!-- 倒计时 -->
   </div>
@@ -26,11 +31,13 @@ import assblay from "./assblay";
 import { data, columns, columns2, columns3, tabl } from "./api";
 import wangxiaoTable1 from "./components/wangxiao-table";
 import wangxiaoStep from "./components/wangxiao-step";
+import wangxiaoRender from "./components/render/wangxiao-render";
 export default {
   name: 'App',
   components: {
     wangxiaoTable1,
     wangxiaoStep,
+    wangxiaoRender,
   },
   data() {
     return {
@@ -127,6 +134,9 @@ export default {
     },
     dragRow(i1, i2, i3, i4, i5){
       console.log(i1, i2, i3, i4, i5);
+    },
+    onChenage(item, i){
+      console.log(item, i);
     }
   }
 }
