@@ -42,14 +42,14 @@ export default {
     onChange(file, fileList) {
       this.fileList = fileList;
       let suffix = this.getFileType(file.name); // 获取文件后缀名
-      let suffixArray = ["doc", "docx", "pdf", 'xlsx']; // 限制的文件类型，根据情况自己定义
-      const isL500M = file.size / 1024 / 1024 > 500;
+      let suffixArray = ["doc", "docx", "pdf"]; // 限制的文件类型，根据情况自己定义
       if (!suffixArray.includes(suffix)) {
-        this.$modal.msgWarning("文件格式错误");
+        this.$message.warning("文件格式错误");
         const currIdx = this.fileList.indexOf(file);
         this.fileList.splice(currIdx, 1);
         return;
       }
+      const isL500M = file.size / 1024 / 1024 > 500;
       if (isL500M) {
         this.$message.error("上传文件大小不能超过 10MB");
         const currIdx = this.fileList.indexOf(file);
@@ -90,25 +90,25 @@ export default {
 }
 
 .upload-conten {
-  background: rgba(0,127,207,0.03);
+  background: rgba(0, 127, 207, 0.03);
   height: 100%;
 }
 
 .upload-conten:hover {
-  background: rgba(0,127,207,0.05);
+  background: rgba(0, 127, 207, 0.05);
 }
 
 .upload-btn {
   border-radius: 0;
-  background: rgba(0,127,207,0.9);
+  background: rgba(0, 127, 207, 0.9);
   color: #fff;
-  border: 1px solid rgba(0,127,207,0.9);
+  border: 1px solid rgba(0, 127, 207, 0.9);
   margin-top: 40px;
   margin-bottom: 16px;
 }
 
 .upload-btn:hover {
-  background: rgba(0,127,207,1);
+  background: rgba(0, 127, 207, 1);
   color: #fff;
 }
 
@@ -116,7 +116,8 @@ export default {
   font-size: 14px !important;
   font-family: PingFang SC-Regular, PingFang SC;
   font-weight: 400;
-  color: rgba(0,127,207,1);
+  color: rgba(0, 127, 207, 1);
+  line-height: 37px;
 }
 
 .el-upload__tip {
@@ -124,7 +125,7 @@ export default {
   font-family: PingFang SC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.4);
-  line-height: 20px;
+  line-height: 29px;
 }
 
 .files {
@@ -192,4 +193,5 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
-}</style>
+}
+</style>

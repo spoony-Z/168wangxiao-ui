@@ -277,22 +277,6 @@ export default {
       immediate: true,
       deep: true,
     },
-    // drag: {
-    //   handler(val) {
-    //     var _that = this
-    //     if (val) {
-    //       this.$nextTick(() => {
-    //         console.log(val, "1111111");
-    //         _that.oldList = JSON.parse(JSON.stringify(_that.copyColumns))
-    //         _that.newList = JSON.parse(JSON.stringify(_that.copyColumns))
-    //         _that.columnDrop()
-    //         _that.rowDrop()
-    //       })
-    //     }
-    //   },
-    //   deep: true,
-    //   immediate: true,
-    // }
   },
   mounted() {
     const that = this
@@ -374,7 +358,6 @@ export default {
       const _this = this;
         // const tbody = document.querySelector('.el-table__body-wrapper tbody');
         const tbody = this.$refs.table.$el.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
-        console.log(tbody);
         Sortable.create(tbody, {
           //  指定父元素下可被拖拽的子元素
           draggable: ".el-table__row",
