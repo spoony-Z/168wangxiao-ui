@@ -1,5 +1,5 @@
 import Son1 from './son'
-// import scopendHender from "./scopendHender"
+import scopendHender from "./scopendHender"
 
 // const Son2 = {
 //     name: "Son",
@@ -13,13 +13,6 @@ import Son1 from './son'
 //         )
 //     }
 // }
-const scopendHender = {
-    render() {
-        return (
-            <div>i滴滴滴滴滴滴滴</div>
-        )
-    },
-}
 export default {
     name: "WangxiaoRender",
     props: {
@@ -40,7 +33,6 @@ export default {
         const scopedSlots = {
             hender: () => {
                return <scopendHender></scopendHender>
-
             } 
         }
         return (
@@ -48,11 +40,11 @@ export default {
                 {/* 事件传参必须使用高阶(箭头)函数， 不然会报错 */}
                 <div onClick={() => cliskTest("事件传参")} style={{ backgroundColor: 'red' }}>我是render{age}</div>
                 {/* render函数中使用子组件和传参 */}
+                {/* <Son2 age={'22222'}></Son2> */}
                 <Son1 age={'11111'} scopedSlots={ scopedSlots }></Son1>
                 {
                     this.$scopedSlots.ages()
                 }
-                {/* <Son2 age={'22222'}></Son2> */}
             </div>
         )
     },
