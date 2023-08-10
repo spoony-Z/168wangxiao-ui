@@ -29,3 +29,10 @@ div[class*=language-].line-numbers-mode .line-numbers {
 div[class*=language-] {
   // background-color: #909ea357;
 }
+
+.vp-feature-item:hover {
+  background-color: var(--bg-color-secondary);
+  box-shadow: 0 2px 12px 0 var(--card-shadow);
+  // transform: translate(5px, 5px, 5px, 5px);
+  transform: scale(1.0);
+}
