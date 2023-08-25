@@ -1,6 +1,6 @@
 // place your custom styles here
 .vp-sidebar-link {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 /** 隐藏代码行数 */
@@ -13,6 +13,7 @@ div[class*=language-].line-numbers-mode pre {
 div[class*=language-].line-numbers-mode::after {
   display: none !important;
 }
+
 div[class*=language-].line-numbers-mode .line-numbers {
   display: none;
 }
@@ -35,4 +36,9 @@ div[class*=language-] {
   box-shadow: 0 2px 12px 0 var(--card-shadow);
   // transform: translate(5px, 5px, 5px, 5px);
   transform: scale(1.0);
+}
+
+.vp-features>a:last-child {
+  margin: 0 auto;
+  margin-left: 0;
 }
