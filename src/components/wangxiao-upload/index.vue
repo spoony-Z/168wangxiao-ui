@@ -3,20 +3,17 @@
     <el-upload class="upload-demo" drag action multiple :show-file-list="false" :auto-upload="false"
       :on-change="onChange">
       <div class="upload-conten">
-        <el-button class="upload-btn">上传论文</el-button>
-        <div class="el-upload__text">点击上传 / 拖拽到此区域上传</div>
-        <div class="el-upload__tip" slot="tip">
-          支持扩展名：word文件(.doc .docx) 、 PDF文件(.pdf)、文件大小在500M内
-        </div>
+        <el-button class="upload-btn">{{ text }}</el-button>
+        <div class="el-upload__text">{{ describe }}</div>
+        <div class="el-upload__tip" slot="tip">{{ prompt }}</div>
+        <div class="dimension">{{ dimension }}</div>
       </div>
     </el-upload>
     <div v-if="fileList.length > 0" class="files">
       <div class="item-list" v-for="(item, index) in fileList" :key="index">
         <div class="left">
-          <img src="./img/word.png" alt="" />
-          <div class="file-name">
-            {{ item.name }}
-          </div>
+          <img src="./img/word.png" />
+          <div class="file-name">{{ item.name }}</div>
         </div>
         <div class="delete-icon">
           <img class="img1" src="./img/del.png" alt="" />
@@ -30,6 +27,24 @@
 <script>
 export default {
   name: "WangxiaoUpload",
+  props: {
+    text: {
+      type: String,
+      default: "上传文件"
+    },
+    describe: {
+      type: String,
+      default: "点击上传 / 拖拽到此区域上传"
+    },
+    prompt: {
+      type: String,
+      default: "支持扩展名：word文件(.doc .docx) 、 PDF文件(.pdf)、文件大小在500M内"
+    },
+    dimension: {
+      type: String,
+      default: ""
+    }
+  },
   data() {
     return {
       fileList: [],
@@ -82,6 +97,7 @@ export default {
   border: none;
   border-radius: 0 !important;
   width: 100%;
+  height: auto;
 }
 
 .upload-container {
@@ -92,6 +108,7 @@ export default {
 .upload-conten {
   background: rgba(0, 127, 207, 0.03);
   height: 100%;
+  padding-bottom: 20px;
 }
 
 .upload-conten:hover {
@@ -125,6 +142,15 @@ export default {
   font-family: PingFang SC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.4);
+  line-height: 29px;
+}
+
+
+.dimension {
+  font-size: 12px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: red;
   line-height: 29px;
 }
 

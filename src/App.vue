@@ -14,9 +14,9 @@
       </template>
     </Wangxiao-sidebar>
     <wangxiaoStep :count="count" :list="list"></wangxiaoStep>
-    <WangxiaoUpload></WangxiaoUpload>
+    <WangxiaoUpload ></WangxiaoUpload>
     <wangxiao-editor></wangxiao-editor>
-    <wangxiaoRender age="111111" @chenage="onChenage" >
+    <wangxiaoRender age="111111" @chenage="onChenage">
       <template #ages>
         打卡打卡打卡打卡
       </template>
