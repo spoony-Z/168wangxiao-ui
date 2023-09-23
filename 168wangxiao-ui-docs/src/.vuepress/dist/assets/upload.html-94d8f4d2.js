@@ -1,0 +1,1 @@
+import{_ as t}from"./plugin-vue_export-helper-c27b6911.js";import{o as a,c as o,d as e,e as r}from"./app-00e8924e.js";const c={},s=e("h1",{id:"上传",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#上传","aria-hidden":"true"},"#"),r(" 上传")],-1),d=[s];function n(_,i){return a(),o("div",null,d)}const f=t(c,[["render",n],["__file","upload.html.vue"]]);export{f as default};

@@ -8,49 +8,7 @@ order: 3
 
 # 表格
 
-## columns：表头数据
-
-必须：是
-
-类型：Array
-
-默认值： []
-
-字段说明：prop："对应 data 数据字段"，label："表头名称"
-
-## data：列表数据
-
-必须：是
-
-类型：Array
-
-默认值：[]
-
-## showPagination：是否显示分页
-
-类型：Boolean
-
-默认值：true
-
-可选值：true | false
-
-## frontendPaging：前端分页
-
-类型：Boolean
-
-默认值：false
-
-可选值：true | false
-
-###  pagination：前端分页
-
-​	类型：Object
-
-​	默认值：false
-
-​	可选值：true | false
-
-:::tip 演示
+:::tip 演示 一
 
 ```vue
   <wangxiao-table 
@@ -62,74 +20,7 @@ order: 3
 
 :::
 
-## BackendPaging：后端分页
-
-类型：Boolean
-
-默认值：false
-
-可选值：true | false
-
-### 分页参数：endPage
-
-类型：Object
-
-默认值：{
-
-​     currentPage: 1,
-
-​     pageSize: 10,
-
-​     total: 0
-
-​    }
-
-## headerCellStyle：表头单元格样式配置
-
-可选值：Function | Object
-
-默认值：
-
-```javascript
- {
- 'background-color': '#f5f6f7',
- 'font-size': '12px',
- 'padding': '10px',
-}
-```
-
-## cellStyle：表格单元格的样式配置
-
-可选值：Function | Object
-
-默认值：
-
-```javascript
-{
- 'font-size': '12px',
- 'padding': '10px'
-}
-```
-
-## showColumns：是否显示自定义列
-
-类型：Boolean
-
-默认值：false
-
-可选值：true | false
-
-## drag 是否列拖拽
-
-类型：Boolean
-
-默认值：false
-
-可选值：true | false
-
-## paging：自定义分页
-
-:::tip 演示
+:::tip 演示 二
 
 ```vue
 <wangxiao-table :data="data" :columns="columns">
@@ -155,84 +46,38 @@ order: 3
 ```
 :::
 
-## 组件传参
 
-```javascript
-    columns: {
-      type: Array,
-      default: () => []
-    },
-    data: {
-      type: Array,
-      default: () => []
-    },
-    headerCellStyle: {
-      type: Function || Object,
-      default: () => {
-        return {
-          'background-color': '#f5f6f7',
-          'font-size': '12px',
-          'padding': '10px',
-        }
-      }
-    },
-    cellStyle: {
-      type: Function || Object,
-      default: () => {
-        return {
-          'font-size': '12px',
-          'padding': '10px'
-        }
-      }
-    },
-    /** 是否显示分页 */
-    showPagination: {
-      type: Boolean,
-      default: true,
-    },
-    /** 前端分页 */
-    frontendPaging: {
-      type: Boolean,
-      default: false,
-    },
-    /** 前端分页参数 */
-    FrontPage: {
-      type: Object,
-      default: () => ({})
-    },
+## API
 
-    /** 后端分页 */
-    BackendPaging: {
-      type: Boolean,
-      default: true,
-    },
-    /** 后端分页参数 */
-    endPage: {
-      type: Object,
-      default: () => {
-        return {
-          currentPage: 1,
-          pageSize: 10,
-          total: 0
-        }
-      }
-    },
-    pageSizes: {
-      default() {
-        return [10, 20, 30, 50, 100];
-      },
-      type: Array
-    },
-    layout: {
-      default() {
-        return 'total, sizes, prev, pager, next, jumper';
-      },
-      type: String
-    },
+### Attribute
 
-    /** 是否显示自定义列 */
-    showColumns: {
-      default: false,
-      type: Boolean
-    },
-```
+| 名称            | 描述                                 | 类型    | 默认值                                                       | 可选值         | 是否必填 |
+| --------------- | ------------------------------------ | ------- | ------------------------------------------------------------ | -------------- | -------- |
+|                 |                                      |         |                                                              |                |          |
+| columns         | 表头数据                             | Array   | ————                                                         | ————           | 是       |
+| data            | 列表数据                             | String  | ————                                                         | ————           | 是       |
+| showPagination  | 是否显示分页                         | Boolean | true                                                         | true \| false  | 否       |
+| frontendPaging  | 前端分页                             | Boolean | true                                                         | true \| false  | 否       |
+| BackendPaging   | 后端分页                             | Boolean | true                                                         | true \| false  | 否       |
+| endPage         | 分页参数(数据总数，当前页，每页数据) | Object  | total:0,<br />currentPage:1,<br />pageSize:10                | ————           | 否       |
+| headerCellStyle | 表头单元格样式配置                   | Object  | 'background':'#f5f6f7',<br />'font-size': '12px',<br />'padding': '10px', | ————           | 否       |
+| cellStyle       | 表格单元格的样式配置                 | Object  | 'font-size': '12px',<br />'padding': '10px'                  | ————           | 否       |
+| showColumns     | 显示自定义列                         | Boolean | false                                                        | true  \| false | 否       |
+| drag            | 列拖拽                               | Boolean | false                                                        | true \| false  | 否       |
+| pageSizes       | 每页显示个数选择器的选项设置         | Array   | [10, 20, 30, 50, 100]                                        | ————           | 否       |
+
+### Event
+
+| 方法名         | 描述                                                         | 回调参数                                              |
+| -------------- | ------------------------------------------------------------ | ----------------------------------------------------- |
+| current-paging | currentPage 改变时会触发(重写 table 分页回调，不要使用`current-change`) | 当前页                                                |
+| size-paging    | pageSize 改变时会触发                                        | 每页条数                                              |
+| dragRow        | 拖拽行时触发                                                 | Function(oldIndex,oldData,newIndex, currRow,tempData) |
+
+### Slot
+
+| 名称  | 描述           |
+| ------- | -------------- |
+| table-top-btn | 表头右上内容（showColumns 必须为true） |
+| table-right-btn | 表头左上内容（showColumns 必须为true） |
+| tempPagination | 自定义分页 |

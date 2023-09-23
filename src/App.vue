@@ -13,8 +13,12 @@
         <span>ififififi</span>
       </template>
     </Wangxiao-sidebar>
-    <wangxiaoStep :count="count" :list="list"></wangxiaoStep>
-    <WangxiaoUpload ></WangxiaoUpload>
+    <wangxiaoStep :count="count" :list="list">
+      <template #ssd>
+        <div>插槽</div>
+      </template>
+    </wangxiaoStep>
+    <WangxiaoUpload style="margin: 50px; width: 15%;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false"></WangxiaoUpload>
     <wangxiao-editor></wangxiao-editor>
     <wangxiaoRender age="111111" @chenage="onChenage">
       <template #ages>
@@ -31,13 +35,13 @@ import assblay from "./assblay";
 import { data, columns, columns2, columns3, tabl } from "./api";
 import wangxiaoTable1 from "./components/wangxiao-table";
 import wangxiaoStep from "./components/wangxiao-step";
-import wangxiaoRender from "./components/render/wangxiao-render";
+// import wangxiaoRender from "./components/render/wangxiao-render";
 export default {
   name: 'App',
   components: {
     wangxiaoTable1,
     wangxiaoStep,
-    wangxiaoRender,
+    // wangxiaoRender,
   },
   data() {
     return {

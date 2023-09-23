@@ -5,7 +5,7 @@ import { searchProPlugin } from "vuepress-plugin-search-pro";
 
 
 export default defineUserConfig({
-  base: "/",
+  base: "/168wangxiao-ui/",
   lang: "zh-CN",
   title: "168wangxiao-ui",
   description: "vuepress-theme-hope 的文档演示",

@@ -7,9 +7,44 @@ order: 2
 ![valine](https://img.shields.io/badge/valine-1.3.4-blue.svg)
 
 # 按钮
-:::tip 演示
+::: vue-demo 可选的标题文字
+
 ```vue
-<wangxiao-btn>按钮</wangxiao-btn>
+<template>
+  <div class="box">
+    <code>vuepress-theme-hope</code> is
+    <span @click="handler">{{ message }}</span
+    >!
+    <el-button>fgsdfdsf</el-button>
+  </div>
+</template>
+<script>
+const { ref } = Vue;
+
+export default {
+  setup() {
+    const message = ref("powerful");
+
+    const handler = () => {
+      message.value = "very " + message.value;
+    };
+
+    return {
+      message,
+      handler,
+    };
+  },
+};
+</script>
+<style>
+.box span {
+  color: red;
+}
+</style>
+
 ```
+
+
 :::
+
 

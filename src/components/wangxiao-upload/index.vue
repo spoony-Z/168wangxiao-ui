@@ -1,18 +1,28 @@
 <template>
   <div class="upload-container">
-    <el-upload class="upload-demo" drag action multiple :show-file-list="false" :auto-upload="false"
+    <el-upload class="upload-demo" drag action :multiple="multiple" :show-file-list="false" :auto-upload="false"
       :on-change="onChange">
-      <div class="upload-conten">
+      <div v-if="echo == 'card' && fileList.length !== 0" class="echo-style">
+        <img :src="imgURL" alt="" style="width: 100%; height: 100%;">
+        <div class="masking-out">
+          <div class="masking-out-style">
+            <el-button type="text" icon="el-icon-delete" @click="deleteImg"></el-button>
+            <span> | </span>
+            <el-button type="text" icon="el-icon-view" @click="preview"></el-button>
+          </div>
+        </div>
+      </div>
+      <div v-else class="upload-conten">
         <el-button class="upload-btn">{{ text }}</el-button>
         <div class="el-upload__text">{{ describe }}</div>
         <div class="el-upload__tip" slot="tip">{{ prompt }}</div>
         <div class="dimension">{{ dimension }}</div>
       </div>
     </el-upload>
-    <div v-if="fileList.length > 0" class="files">
+    <!-- <div v-if="fileList.length > 0" class="files">
       <div class="item-list" v-for="(item, index) in fileList" :key="index">
         <div class="left">
-          <img src="./img/word.png" />
+          <img :src="fileType(item.name)" />
           <div class="file-name">{{ item.name }}</div>
         </div>
         <div class="delete-icon">
@@ -20,11 +30,21 @@
           <img class="img2" src="./img/del-hover.png" @click="removeFile(item, index)" alt="" />
         </div>
       </div>
-    </div>
+    </div> -->
+    <el-dialog :visible.sync="dialogVisible">
+      <img width="100%" :src="imgURL" alt="">
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+import word from "./img/word.png"
+import pdf from "./img/pdf.png"
+import xlsx from "./img/xlsx.png"
+import unknown from "./img/b-file-unknown-active.png"
+
 export default {
   name: "WangxiaoUpload",
   props: {
@@ -43,35 +63,112 @@ export default {
     dimension: {
       type: String,
       default: ""
+    },
+    /** 是否支持多选文件上传 */
+    multiple: {
+      type: Boolean,
+      default: true,
+    },
+    suffixArray: {
+      type: Array,
+      default: () => ["doc", "docx", "pdf"]
+    },
+    fileSize: {
+      type: Number,
+      default: 500
+    },
+
+    /** 图片回显样式 card / list */
+    echo: {
+      type: String,
+      default: "card"
     }
   },
   data() {
     return {
       fileList: [],
+      imgURL: "",
+      dialogVisible: false,
     };
   },
+  computed: {
+    fileType() {
+      return (val) => {
+        let fileIcon = {
+          dox: word,
+          docx: word,
+          doc: word,
+          docm: word,
+          dot: word,
+          pdf: pdf,
+          xlsx: xlsx,
+          xlsm: xlsx,
+          xlsb: xlsx,
+          xltx: xlsx,
+          unknown: unknown,
+        }
+        const parts = val.split('.');
+        return fileIcon[parts[parts.length - 1]]
+      }
+    }
+  },
+  mounted() {
+    Viewer.setDefaults({
+      title: false,
+      toolbar: false,
+      navbar: false,
+      button: false
+    })
+  },
   methods: {
+    /**
+     * 预览
+     */
+    preview() {
+      this.dialogVisible = true
+    },
+    /** 删除图片 */
+    deleteImg() {
+      this.fileList = [];
+      this.imgURL = "";
+      this.$emit("input", this.imgURL, this.fileList)
+    },
     /**
      * 文件变化
      */
     onChange(file, fileList) {
+      console.log(fileList);
       this.fileList = fileList;
       let suffix = this.getFileType(file.name); // 获取文件后缀名
-      let suffixArray = ["doc", "docx", "pdf"]; // 限制的文件类型，根据情况自己定义
-      if (!suffixArray.includes(suffix)) {
+      // let suffixArray = []; // 限制的文件类型，根据情况自己定义
+      if (!this.suffixArray.includes(suffix)) {
         this.$message.warning("文件格式错误");
         const currIdx = this.fileList.indexOf(file);
         this.fileList.splice(currIdx, 1);
         return;
       }
-      const isL500M = file.size / 1024 / 1024 > 500;
+      const isL500M = file.size / 1024 / 1024 > this.fileSize;
       if (isL500M) {
-        this.$message.error("上传文件大小不能超过 500MB");
+        this.$message.error(`上传文件大小不能超过 ${this.fileSize}MB`);
         const currIdx = this.fileList.indexOf(file);
         this.fileList.splice(currIdx, 1);
         return;
       }
-      this.$emit("input", fileList)
+      if (this.echo === "card") {
+        let files = event.target.files[0];
+        let url = "";
+        var reader = new FileReader();
+        reader.readAsDataURL(files);
+        let that = this;
+        reader.onload = function () {
+          url = this.result.substring(this.result.indexOf(",") + 1);
+          that.imgURL = "data:image/png;base64," + url;
+        };
+        this.$emit("input", this.imgURL, fileList)
+      } else {
+        this.$emit("input", fileList)
+      }
+
     },
     /**
      * 获取文件后缀
@@ -167,7 +264,7 @@ export default {
 
 .left {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .upload-demo {
@@ -213,6 +310,44 @@ export default {
 
 .item-list:hover .img1 {
   opacity: 0;
+}
+
+.echo-style {
+  position: relative;
+}
+
+.masking-out {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: #00000099 !important;
+  z-index: 999999999999;
+  transition: 3s;
+  position: absolute;
+  top: 0;
+  /* display: flex; */
+}
+
+.masking-out-style {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.masking-out span {
+  margin: 0 20px;
+}
+
+.masking-out-style .el-button--text {
+  color: #ffffff;
+}
+
+>>>.echo-style:hover .masking-out {
+  display: block;
+  z-index: 999999999999;
 }
 
 >>>.el-upload {

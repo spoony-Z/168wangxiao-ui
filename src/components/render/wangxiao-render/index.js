@@ -50,6 +50,9 @@ export default {
     },
     created(){
         console.log("生命周期也可以正常触发 created");
+        this.$nextTick(() => {
+        console.log("生命周期也可以正常触发 nextTick");
+        })
     },
     mounted(){
         console.log("生命周期也可以正常触发 mounted");
