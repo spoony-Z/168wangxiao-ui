@@ -1,0 +1,1 @@
+import{_ as t}from"./plugin-vue_export-helper-c27b6911.js";import{o,c as r,d as e,e as a}from"./app-e43bb610.js";const c={},s=e("h1",{id:"富文本",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#富文本","aria-hidden":"true"},"#"),a(" 富文本")],-1),d=[s];function n(_,i){return o(),r("div",null,d)}const f=t(c,[["render",n],["__file","editor.html.vue"]]);export{f as default};

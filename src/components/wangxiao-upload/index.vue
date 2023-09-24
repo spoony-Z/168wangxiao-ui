@@ -237,7 +237,6 @@ export default {
      * 文件变化
      */
     onChange(file, fileList) {
-      console.log(fileList);
       this.fileList = fileList;
       let suffix = this.getFileType(file.name); // 获取文件后缀名
       // let suffixArray = []; // 限制的文件类型，根据情况自己定义
@@ -264,11 +263,10 @@ export default {
           url = this.result.substring(this.result.indexOf(",") + 1);
           that.imgURL = "data:image/png;base64," + url;
         };
-        this.$emit("input", this.imgURL, fileList)
+        this.$emit("input", this.fileList)
       } else {
         this.$emit("input", fileList)
       }
-
     },
     /**
      * 获取文件后缀
