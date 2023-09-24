@@ -1,25 +1,77 @@
 <template>
-  <div class="upload-container">
+  <div class="upload-container" :style="{ '--wx-upload-img-h': eHeight + 'px', '--wx-upload-img-w': eWidth + 'px' }">
     <el-upload class="upload-demo" drag action :multiple="multiple" :show-file-list="false" :auto-upload="false"
       :on-change="onChange">
-      <div v-if="echo == 'card' && fileList.length !== 0" class="echo-style">
-        <img :src="imgURL" alt="" style="width: 100%; height: 100%;">
-        <div class="masking-out">
-          <div class="masking-out-style">
-            <el-button type="text" icon="el-icon-delete" @click="deleteImg"></el-button>
-            <span> | </span>
-            <el-button type="text" icon="el-icon-view" @click="preview"></el-button>
+      <div v-if="this.$scopedSlots.content">
+        <slot name="content"></slot>
+      </div>
+      <div v-else style="height: 100%;">
+        <div v-if="echoData == 'card' && fileList.length !== 0" class="echo-style">
+          <img :src="imgURL" alt="" class="id-number-img">
+          <div class="masking-out">
+            <div class="masking-out-style">
+              <el-button type="text" icon="el-icon-delete" @click.stop="deleteImg"></el-button>
+              <span> | </span>
+              <el-button type="text" icon="el-icon-view" @click.stop="preview"></el-button>
+            </div>
           </div>
         </div>
+
+        <!-- 身份证上传 正面 -->
+        <div ref="echartsWrapper" class="id-numner" v-if="IDNumber && frontBack === 'front' && fileList.length === 0">
+          <div class="upload-card">
+            <div>
+              <div class="full-name">
+                <div></div>
+                <div></div>
+              </div>
+              <div class="full-name">
+                <div></div>
+                <div></div>
+              </div>
+              <div class="full-name">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+            <img src="./img/4746.png" alt="">
+          </div>
+          <div class="id_number_front">
+            <div class="el-upload__text_number">{{ IDdescribe }}</div>
+            <div class="el-upload__tip_id_number" slot="tip">{{ IDprompt }} </div>
+            <div class="dimension">{{ IDdimension }}</div>
+          </div>
+        </div>
+
+        <!-- 身份证上传 反面 -->
+        <div ref="echartsWrapper" class="id-numner_opposite"
+          v-else-if="IDNumber && frontBack === 'back' && fileList.length === 0">
+          <div class="upload-card">
+            <img src="./img/4747.png" alt="">
+            <div class="id-img">
+              <img src="./img/4793.png" alt="">
+            </div>
+          </div>
+          <div class="id_number_opposite">
+            <div class="el-upload__text_number">{{ IDdescribe }}</div>
+            <div class="el-upload__tip_id_number" slot="tip">{{ IDprompt }} </div>
+            <div class="dimension">{{ IDdimension }}</div>
+          </div>
+        </div>
+
+        <!-- 列表上传 -->
+        <div v-else-if="listJudgment" class="upload-conten" ref="echartsWrapper">
+          <el-button class="upload-btn">{{ text }}</el-button>
+          <div class="el-upload__text">{{ describe }}</div>
+          <div class="el-upload__tip" slot="tip">{{ prompt }}</div>
+          <div class="dimension">{{ dimension }}</div>
+        </div>
       </div>
-      <div v-else class="upload-conten">
-        <el-button class="upload-btn">{{ text }}</el-button>
-        <div class="el-upload__text">{{ describe }}</div>
-        <div class="el-upload__tip" slot="tip">{{ prompt }}</div>
-        <div class="dimension">{{ dimension }}</div>
-      </div>
+
     </el-upload>
-    <!-- <div v-if="fileList.length > 0" class="files">
+
+    <!-- 文件回显列表 -->
+    <div v-if="fileList.length > 0 && echoData !== 'card'" class="files">
       <div class="item-list" v-for="(item, index) in fileList" :key="index">
         <div class="left">
           <img :src="fileType(item.name)" />
@@ -30,7 +82,9 @@
           <img class="img2" src="./img/del-hover.png" @click="removeFile(item, index)" alt="" />
         </div>
       </div>
-    </div> -->
+    </div>
+
+    <!-- 预览弹窗 -->
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="imgURL" alt="">
     </el-dialog>
@@ -38,8 +92,6 @@
 </template>
 
 <script>
-import Viewer from 'v-viewer'
-import 'viewerjs/dist/viewer.css'
 import word from "./img/word.png"
 import pdf from "./img/pdf.png"
 import xlsx from "./img/xlsx.png"
@@ -60,35 +112,70 @@ export default {
       type: String,
       default: "支持扩展名：word文件(.doc .docx) 、 PDF文件(.pdf)、文件大小在500M内"
     },
+
+    /** 底部警告 */
     dimension: {
       type: String,
       default: ""
     },
+
     /** 是否支持多选文件上传 */
     multiple: {
       type: Boolean,
       default: true,
     },
+
+    /** 限制文件类型 */
     suffixArray: {
       type: Array,
       default: () => ["doc", "docx", "pdf"]
     },
+
+    /** 限制文件大小 */
     fileSize: {
       type: Number,
       default: 500
     },
 
+    IDNumber: {
+      type: Boolean,
+      default: false
+    },
     /** 图片回显样式 card / list */
     echo: {
       type: String,
-      default: "card"
-    }
+      default: "list"
+    },
+
+    /** 身份证上传 正反面 front / back */
+    frontBack: {
+      type: String,
+      default: "front"
+    },
+
+    /** 身份证上传提示语 */
+    IDprompt: {
+      type: String,
+      default: "支持扩展名：.jpg .jpeg .png，文件大小在5M内"
+    },
+    IDdescribe: {
+      type: String,
+      default: "点击上传 / 拖拽到此区域上传头像面"
+    },
+
+    /** 身份证上传底部警告 */
+    IDdimension: {
+      type: String,
+      default: ""
+    },
   },
   data() {
     return {
       fileList: [],
       imgURL: "",
       dialogVisible: false,
+      eHeight: "",
+      eWidth: "",
     };
   },
   computed: {
@@ -110,14 +197,27 @@ export default {
         const parts = val.split('.');
         return fileIcon[parts[parts.length - 1]]
       }
+    },
+    echoData() {
+      if (this.IDNumber) {
+        return "card";
+      } else {
+        return this.echo;
+      }
+    },
+    listJudgment() {
+      return !this.IDNumber && (this.echo === "card" ? !this.fileList.length : true);
     }
   },
   mounted() {
-    Viewer.setDefaults({
-      title: false,
-      toolbar: false,
-      navbar: false,
-      button: false
+    const that = this
+    this.$nextTick(() => {
+      if (this.$refs.echartsWrapper) {
+        setTimeout(() => {
+          that.eWidth = this.$refs.echartsWrapper.clientWidth;
+          that.eHeight = this.$refs.echartsWrapper.clientHeight;
+        }, 1000)
+      }
     })
   },
   methods: {
@@ -154,7 +254,7 @@ export default {
         this.fileList.splice(currIdx, 1);
         return;
       }
-      if (this.echo === "card") {
+      if (this.echoData === "card") {
         let files = event.target.files[0];
         let url = "";
         var reader = new FileReader();
@@ -234,12 +334,20 @@ export default {
   line-height: 37px;
 }
 
+.el-upload__tip_id_number {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+  border-radius: 2px 2px 2px 2px;
+}
+
 .el-upload__tip {
   font-size: 12px;
-  font-family: PingFang SC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.4);
   line-height: 29px;
+  border-radius: 2px 2px 2px 2px;
+  padding: 0 20px;
 }
 
 
@@ -249,6 +357,7 @@ export default {
   font-weight: 400;
   color: red;
   line-height: 29px;
+  border-radius: 2px 2px 2px 2px;
 }
 
 .files {
@@ -316,16 +425,88 @@ export default {
   position: relative;
 }
 
+
+/* 身份证上传样式 */
+
+/* 正面 */
+.upload-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 0 0;
+  align-items: center;
+}
+
+.upload-card img {
+  width: auto;
+  height: auto;
+}
+
+.id-numner {
+  background: rgba(0, 127, 207, 0.03);
+  height: 100%;
+  padding: 20px 40px 20px 25px;
+}
+
+/** 反面 */
+.id-numner_opposite {
+  background: rgba(0, 127, 207, 0.03);
+  height: 100%;
+  padding: 20px 40px;
+}
+
+.id_number_opposite {
+  padding-top: 43px;
+}
+
+.id_number_front {
+  padding-top: 29px;
+}
+
+.el-upload__text_number {
+  font-size: 14px !important;
+  font-weight: 400;
+  color: rgba(0, 127, 207, 1);
+  padding-bottom: 8px;
+}
+
+.full-name {
+  display: flex;
+  column-gap: 20px;
+}
+
+.full-name div:nth-child(1) {
+  width: 42px;
+  height: 17px;
+  background: #007FCE;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 0.1;
+  margin: 7.5px 0;
+}
+
+.full-name div:nth-child(2) {
+  width: 107px;
+  height: 17px;
+  background: #007FCE;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 0.1;
+  margin: 7.5px 0;
+}
+
+.el-upload__tip_number {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+  border-radius: 2px 2px 2px 2px;
+}
+
 .masking-out {
   width: 100%;
   height: 100%;
   display: none;
   background: #00000099 !important;
-  z-index: 999999999999;
   transition: 3s;
   position: absolute;
   top: 0;
-  /* display: flex; */
 }
 
 .masking-out-style {
@@ -345,9 +526,13 @@ export default {
   color: #ffffff;
 }
 
+.id-number-img {
+  width: var(--wx-upload-img-w);
+  height: var(--wx-upload-img-h);
+}
+
 >>>.echo-style:hover .masking-out {
   display: block;
-  z-index: 999999999999;
 }
 
 >>>.el-upload {

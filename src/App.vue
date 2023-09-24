@@ -2,8 +2,8 @@
   <div id="app">
     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
       <el-tab-pane v-for="item in tabl" :label="item.name" :key="item.id" :name="item.id">
-        <wangxiao-table1 @dragRow="dragRow" :key="activeName" drag row-key="id" :data="data" :columns="tablist" showColumns
-          :frontendPaging="true"></wangxiao-table1>
+        <wangxiao-table1 @dragRow="dragRow" :key="activeName" drag row-key="id" :data="data" :columns="tablist"
+          showColumns :frontendPaging="true"></wangxiao-table1>
         <!-- <wangxiao-table1 drag row-key="id" :data="data" :columns="columns2" showColumns :frontendPaging="true"></wangxiao-table1>
         <wangxiao-table1 drag row-key="id" :data="data" :columns="columns3" showColumns :frontendPaging="true"></wangxiao-table1> -->
       </el-tab-pane>
@@ -18,7 +18,29 @@
         <div>插槽</div>
       </template>
     </wangxiaoStep>
-    <WangxiaoUpload style="margin: 50px; width: 15%;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false"></WangxiaoUpload>
+    <div style="display: flex; margin: 50px;">
+      <WangxiaoUpload style="margin-right: 20px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false">
+      </WangxiaoUpload>
+  
+      <WangxiaoUpload echo="card" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+        :multiple="false"></WangxiaoUpload>
+    </div>
+
+    <div style="display: flex; margin: 50px;">
+      <WangxiaoUpload IDNumber frontBack="front" style="margin-right: 20px;width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+        :multiple="false"></WangxiaoUpload>
+      <WangxiaoUpload IDNumber frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+        :multiple="false"></WangxiaoUpload>
+
+    </div>
+
+    <WangxiaoUpload frontBack="back" style="margin: 50px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+      :multiple="false">
+      <template #content>
+        <div>自定义内容</div>
+      </template>
+    </WangxiaoUpload>
+
     <wangxiao-editor></wangxiao-editor>
     <wangxiaoRender age="111111" @chenage="onChenage">
       <template #ages>
@@ -136,10 +158,10 @@ export default {
       console.log(tab, event);
       this.$forceUpdate()
     },
-    dragRow(i1, i2, i3, i4, i5){
+    dragRow(i1, i2, i3, i4, i5) {
       console.log(i1, i2, i3, i4, i5);
     },
-    onChenage(item, i){
+    onChenage(item, i) {
       console.log(item, i);
     }
   }
