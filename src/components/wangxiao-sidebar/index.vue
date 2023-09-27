@@ -5,7 +5,10 @@
       <template v-if="$scopedSlots[item[prop]]">
         <slot :name="item[prop]" :scope="item" :index="index"></slot>
       </template>
-      <div v-else>{{ item[label] }}</div>
+      <div v-else>
+        {{ item[label] }}
+        <slot :row="item" :list="semesterList"></slot>
+      </div>
     </div>
   </el-card>
 </template>

@@ -12,6 +12,7 @@
       <template #aaa>
         <span>ififififi</span>
       </template>
+      <template #default>的基督教的角度讲</template>
     </Wangxiao-sidebar>
     <wangxiaoStep :count="count" :list="list">
       <template #ssd>
@@ -27,19 +28,19 @@
     </div>
 
     <div style="display: flex; margin: 50px;">
-      <WangxiaoUpload IDNumber frontBack="front" style="margin-right: 20px;width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
-        :multiple="false"></WangxiaoUpload>
-      <WangxiaoUpload IDNumber frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
-        :multiple="false"></WangxiaoUpload>
+      <wangxiao-upload IDNumber frontBack="front" style="margin-right: 20px;width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+        :multiple="false"></wangxiao-upload>
+      <wangxiao-upload IDNumber frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+        :multiple="false"></wangxiao-upload>
 
     </div>
 
-    <WangxiaoUpload frontBack="back" style="margin: 50px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+    <wangxiao-upload frontBack="back" style="margin: 50px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
       :multiple="false">
       <template #content>
         <div>自定义内容</div>
       </template>
-    </WangxiaoUpload>
+    </wangxiao-upload>
 
     <wangxiao-editor></wangxiao-editor>
     <wangxiaoRender age="111111" @chenage="onChenage">
@@ -57,13 +58,15 @@ import assblay from "./assblay";
 import { data, columns, columns2, columns3, tabl } from "./api";
 import wangxiaoTable1 from "./components/wangxiao-table";
 import wangxiaoStep from "./components/wangxiao-step";
-// import wangxiaoRender from "./components/render/wangxiao-render";
+import WangxiaoUpload from "./components/wangxiao-upload";
+import wangxiaoRender from "./components/render/wangxiao-render";
 export default {
   name: 'App',
   components: {
     wangxiaoTable1,
     wangxiaoStep,
-    // wangxiaoRender,
+    wangxiaoRender,
+    WangxiaoUpload,
   },
   data() {
     return {

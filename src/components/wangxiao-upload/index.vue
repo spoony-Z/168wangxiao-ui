@@ -34,7 +34,7 @@
                 <div></div>
               </div>
             </div>
-            <img src="./img/4746.png" alt="">
+            <img :src="frontImg" alt="">
           </div>
           <div class="id_number_front">
             <div class="el-upload__text_number">{{ IDdescribe }}</div>
@@ -47,9 +47,9 @@
         <div ref="echartsWrapper" class="id-numner_opposite"
           v-else-if="IDNumber && frontBack === 'back' && fileList.length === 0">
           <div class="upload-card">
-            <img src="./img/4747.png" alt="">
+            <img :src="reverseImg" alt="">
             <div class="id-img">
-              <img src="./img/4793.png" alt="">
+              <img :src="nationalEmblem" alt="">
             </div>
           </div>
           <div class="id_number_opposite">
@@ -96,6 +96,7 @@ import word from "./img/word.png"
 import pdf from "./img/pdf.png"
 import xlsx from "./img/xlsx.png"
 import unknown from "./img/b-file-unknown-active.png"
+import {frontImg, reverseImg, nationalEmblem} from "./base64"
 
 export default {
   name: "WangxiaoUpload",
@@ -171,6 +172,9 @@ export default {
   },
   data() {
     return {
+      frontImg,
+      nationalEmblem,
+      reverseImg,
       fileList: [],
       imgURL: "",
       dialogVisible: false,
@@ -364,7 +368,6 @@ export default {
 
 .file-name {
   font-size: 16px;
-  font-family: PingFang SC-Regular, PingFang SC;
   color: #212121;
   margin-left: 10px;
 }
