@@ -28,9 +28,9 @@
     </div>
 
     <div style="display: flex; margin: 50px;">
-      <wangxiao-upload IDNumber frontBack="front" style="margin-right: 20px;width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+      <wangxiao-upload id-card frontBack="front" style="margin-right: 20px;width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
         :multiple="false"></wangxiao-upload>
-      <wangxiao-upload IDNumber frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+      <wangxiao-upload idCard frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
         :multiple="false"></wangxiao-upload>
 
     </div>

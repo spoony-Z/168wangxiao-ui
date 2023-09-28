@@ -18,7 +18,7 @@
         </div>
 
         <!-- 身份证上传 正面 -->
-        <div ref="echartsWrapper" class="id-numner" v-if="IDNumber && frontBack === 'front' && fileList.length === 0">
+        <div ref="echartsWrapper" class="id-numner" v-if="idCard && frontBack === 'front' && fileList.length === 0">
           <div class="upload-card">
             <div>
               <div class="full-name">
@@ -45,7 +45,7 @@
 
         <!-- 身份证上传 反面 -->
         <div ref="echartsWrapper" class="id-numner_opposite"
-          v-else-if="IDNumber && frontBack === 'back' && fileList.length === 0">
+          v-else-if="idCard && frontBack === 'back' && fileList.length === 0">
           <div class="upload-card">
             <img :src="reverseImg" alt="">
             <div class="id-img">
@@ -138,7 +138,7 @@ export default {
       default: 500
     },
 
-    IDNumber: {
+    idCard: {
       type: Boolean,
       default: false
     },
@@ -203,14 +203,14 @@ export default {
       }
     },
     echoData() {
-      if (this.IDNumber) {
+      if (this.idCard) {
         return "card";
       } else {
         return this.echo;
       }
     },
     listJudgment() {
-      return !this.IDNumber && (this.echo === "card" ? !this.fileList.length : true);
+      return !this.idCard && (this.echo === "card" ? !this.fileList.length : true);
     }
   },
   mounted() {
