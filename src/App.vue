@@ -22,14 +22,14 @@
     <div style="display: flex; margin: 50px;">
       <WangxiaoUpload style="margin-right: 20px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false">
       </WangxiaoUpload>
-  
-      <WangxiaoUpload echo="card" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
-        :multiple="false"></WangxiaoUpload>
+
+      <WangxiaoUpload echo="card" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false">
+      </WangxiaoUpload>
     </div>
 
     <div style="display: flex; margin: 50px;">
-      <wangxiao-upload id-card frontBack="front" style="margin-right: 20px;width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
-        :multiple="false"></wangxiao-upload>
+      <wangxiao-upload id-card frontBack="front" style="margin-right: 20px;width: 406px;"
+        :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false"></wangxiao-upload>
       <wangxiao-upload idCard frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
         :multiple="false"></wangxiao-upload>
 
@@ -153,7 +153,31 @@ export default {
     }
   },
   created() {
-    console.log(assblay)
+    console.log(assblay);
+    function getRootPath() {
+
+      //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+
+      var curWwwPath = window.document.location.href;
+
+      //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+
+      var pathName = window.document.location.pathname;
+
+      var pos = curWwwPath.indexOf(pathName);
+
+      //获取主机地址，如： http://localhost:8083
+
+      var localhostPaht = curWwwPath.substring(0, pos);
+
+      //获取带"/"的项目名，如：/uimcardprj
+
+      var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+
+      return (localhostPaht + projectName);
+
+    }
+    console.log(getRootPath(), "********");
   },
   methods: {
     handleClick(tab, event) {

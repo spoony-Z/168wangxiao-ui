@@ -1,7 +1,7 @@
 <template>
   <div class="upload-container" :style="{ '--wx-upload-img-h': eHeight + 'px', '--wx-upload-img-w': eWidth + 'px' }">
     <el-upload class="upload-demo" drag action :multiple="multiple" :show-file-list="false" :auto-upload="false"
-      :on-change="onChange">
+      :on-change="onChange"  v-bind="$attrs">
       <div v-if="this.$scopedSlots.content">
         <slot name="content"></slot>
       </div>
@@ -37,9 +37,9 @@
             <img :src="frontImg" alt="">
           </div>
           <div class="id_number_front">
-            <div class="el-upload__text_number">{{ IDdescribe }}</div>
-            <div class="el-upload__tip_id_number" slot="tip">{{ IDprompt }} </div>
-            <div class="dimension">{{ IDdimension }}</div>
+            <div class="el-upload__text_number">{{ idDescribe }}</div>
+            <div class="el-upload__tip_id_number" slot="tip">{{ idPrompt }} </div>
+            <div class="dimension">{{ idDimension }}</div>
           </div>
         </div>
 
@@ -53,9 +53,9 @@
             </div>
           </div>
           <div class="id_number_opposite">
-            <div class="el-upload__text_number">{{ IDdescribe }}</div>
-            <div class="el-upload__tip_id_number" slot="tip">{{ IDprompt }} </div>
-            <div class="dimension">{{ IDdimension }}</div>
+            <div class="el-upload__text_number">{{ idDescribe }}</div>
+            <div class="el-upload__tip_id_number" slot="tip">{{ idPrompt }} </div>
+            <div class="dimension">{{ idDimension }}</div>
           </div>
         </div>
 
@@ -155,17 +155,17 @@ export default {
     },
 
     /** 身份证上传提示语 */
-    IDprompt: {
+    idPrompt: {
       type: String,
       default: "支持扩展名：.jpg .jpeg .png，文件大小在5M内"
     },
-    IDdescribe: {
+    idDescribe: {
       type: String,
       default: "点击上传 / 拖拽到此区域上传头像面"
     },
 
     /** 身份证上传底部警告 */
-    IDdimension: {
+    idDimension: {
       type: String,
       default: ""
     },
