@@ -20,7 +20,7 @@
       </template>
     </wangxiaoStep>
     <div style="display: flex; margin: 50px;">
-      <WangxiaoUpload style="margin-right: 20px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false">
+      <WangxiaoUpload :automatic-upload="automaticUpload" :numFiles="1" style="margin-right: 20px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg', 'doc', 'docx', 'pdf']" :multiple="false">
       </WangxiaoUpload>
 
       <WangxiaoUpload echo="card" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false">
@@ -32,7 +32,6 @@
         :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false"></wangxiao-upload>
       <wangxiao-upload idCard frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
         :multiple="false"></wangxiao-upload>
-
     </div>
 
     <wangxiao-upload frontBack="back" style="margin: 50px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
@@ -180,6 +179,9 @@ export default {
     console.log(getRootPath(), "********");
   },
   methods: {
+    automaticUpload(file, files) {
+      console.log(file, files, "*****");
+    },
     handleClick(tab, event) {
       this.tablist = []
       console.log(tab, event);

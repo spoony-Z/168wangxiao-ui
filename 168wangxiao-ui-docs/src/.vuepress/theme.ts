@@ -2,6 +2,9 @@ import { hopeTheme } from "vuepress-theme-hope";
 import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
 
+/** emoji 列表 */
+// https://theme-hope.vuejs.press/zh/cookbook/markdown/emoji/
+
 export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
 

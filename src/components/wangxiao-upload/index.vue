@@ -1,7 +1,8 @@
 <template>
   <div class="upload-container" :style="{ '--wx-upload-img-h': eHeight + 'px', '--wx-upload-img-w': eWidth + 'px' }">
-    <el-upload class="upload-demo" drag action :multiple="multiple" :show-file-list="false" :auto-upload="false"
-      :on-change="onChange"  v-bind="$attrs">
+    <el-upload ref="upload" class="upload-demo" drag action :multiple="multiple" :show-file-list="false"
+      :auto-upload="false" :on-change="onChange" v-bind="$attrs" :limit="numFiles" :on-exceed="onExceed"
+      :on-success="onSuccess">
       <div v-if="this.$scopedSlots.content">
         <slot name="content"></slot>
       </div>
@@ -61,7 +62,7 @@
 
         <!-- 列表上传 -->
         <div v-else-if="listJudgment" class="upload-conten" ref="echartsWrapper">
-          <el-button class="upload-btn">{{ text }}</el-button>
+          <el-button class="upload-btn">{{ numFiles === 1 && fileList.length === 1 ? "重新上传" : text }}</el-button>
           <div class="el-upload__text">{{ describe }}</div>
           <div class="el-upload__tip" slot="tip">{{ prompt }}</div>
           <div class="dimension">{{ dimension }}</div>
@@ -96,7 +97,8 @@ import word from "./img/word.png"
 import pdf from "./img/pdf.png"
 import xlsx from "./img/xlsx.png"
 import unknown from "./img/b-file-unknown-active.png"
-import {frontImg, reverseImg, nationalEmblem} from "./base64"
+import { frontImg, reverseImg, nationalEmblem } from "./base64"
+// import Axios from "axios";
 
 export default {
   name: "WangxiaoUpload",
@@ -169,6 +171,28 @@ export default {
       type: String,
       default: ""
     },
+
+    /** 是否开启自动上传 */
+    automaticUpload: Function,
+
+    /** 上传接口 */
+    uploadInterface: {
+      type: String,
+      default: ""
+    },
+
+    /** 文件个数 */
+    numFiles: {
+      type: Number,
+      default: 3,
+    },
+
+    /** 超出文件提示 */
+    exceedTip: {
+      type: String,
+      default: "文件已超出限制"
+    },
+    
   },
   data() {
     return {
@@ -231,21 +255,23 @@ export default {
     preview() {
       this.dialogVisible = true
     },
+
     /** 删除图片 */
     deleteImg() {
       this.fileList = [];
       this.imgURL = "";
       this.$emit("input", this.imgURL, this.fileList)
     },
+
     /**
      * 文件变化
      */
     onChange(file, fileList) {
-      this.fileList = fileList;
-      let suffix = this.getFileType(file.name); // 获取文件后缀名
-      // let suffixArray = []; // 限制的文件类型，根据情况自己定义
+      //上传成功之后清除历史记录
+      // 获取文件后缀名
+      let suffix = this.getFileType(file.name);
       if (!this.suffixArray.includes(suffix)) {
-        this.$message.warning("文件格式错误");
+        this.$message.warning("文件格式错误，请重新上传！");
         const currIdx = this.fileList.indexOf(file);
         this.fileList.splice(currIdx, 1);
         return;
@@ -257,7 +283,19 @@ export default {
         this.fileList.splice(currIdx, 1);
         return;
       }
+      this.fileList = fileList;
+      
+      /** 自动上传 */
+      if(this.automaticUpload) {
+        this.automaticUpload(file, fileList)
+      }
+
+      /** 重新上传 */
+      if (this.numFiles === 1) {
+        this.$refs["upload"].clearFiles();
+      }
       if (this.echoData === "card") {
+        /** 将 file 文件渲染到页面 */
         let files = event.target.files[0];
         let url = "";
         var reader = new FileReader();
@@ -267,11 +305,21 @@ export default {
           url = this.result.substring(this.result.indexOf(",") + 1);
           that.imgURL = "data:image/png;base64," + url;
         };
-        this.$emit("input", this.fileList)
+        this.$emit("input", file);
       } else {
-        this.$emit("input", fileList)
+        this.$emit("input", fileList);
       }
     },
+
+    /** 文件超出个数 */
+    onExceed() {
+      return this.$message.warning(this.exceedTip)
+    },
+    onSuccess(res, file) {
+      console.log(res, file, "&&&&&&&&&");
+
+    },
+
     /**
      * 获取文件后缀
      */
@@ -283,10 +331,12 @@ export default {
         return "";
       }
     },
+
     /** 删除文件 */
     removeFile(item, i) {
       this.fileList.splice(i, 1)
       this.$emit("input", this.fileList)
+      this.$emit("removeFile", item)
     }
   },
 };

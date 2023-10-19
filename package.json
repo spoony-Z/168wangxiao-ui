@@ -1,6 +1,6 @@
 {
     "name": "168wangxiao-ui",
-    "version": "0.3.25",
+    "version": "0.3.26",
     "description": "基于vue2、element-ui二次封装",
     "author": "spoony-z",
     "private": false,
@@ -29,6 +29,7 @@
         "dist/*"
     ],
     "dependencies": {
+        "axios": "^1.5.1",
         "core-js": "^3.6.5",
         "element-ui": "^2.15.13",
         "sortablejs": "^1.15.0",
