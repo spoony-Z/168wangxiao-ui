@@ -1,8 +1,7 @@
 <template>
   <div class="upload-container" :style="{ '--wx-upload-img-h': eHeight + 'px', '--wx-upload-img-w': eWidth + 'px' }">
     <el-upload ref="upload" class="upload-demo" drag action :multiple="multiple" :show-file-list="false"
-      :auto-upload="false" :on-change="onChange" v-bind="$attrs" :limit="numFiles" :on-exceed="onExceed"
-      :on-success="onSuccess">
+      :auto-upload="false" :on-change="onChange" v-bind="$attrs" :limit="numFiles" :on-exceed="onExceed">
       <div v-if="this.$scopedSlots.content">
         <slot name="content"></slot>
       </div>
@@ -97,7 +96,8 @@ import word from "./img/word.png"
 import pdf from "./img/pdf.png"
 import xlsx from "./img/xlsx.png"
 import unknown from "./img/b-file-unknown-active.png"
-import { frontImg, reverseImg, nationalEmblem } from "./base64"
+import { frontImg, reverseImg, nationalEmblem } from "./base64";
+import { getFileNameFromUrl } from 'ts-tool-list';
 // import Axios from "axios";
 
 export default {
@@ -175,6 +175,15 @@ export default {
     /** 是否开启自动上传 */
     automaticUpload: Function,
 
+    /** 删除文件 */
+    removeFiles: Function,
+
+    /** 初始文件列表 */
+    initialFileList: {
+      type: Array,
+      default: () => []
+    },
+
     /** 上传接口 */
     uploadInterface: {
       type: String,
@@ -184,7 +193,7 @@ export default {
     /** 文件个数 */
     numFiles: {
       type: Number,
-      default: 3,
+      default: null,
     },
 
     /** 超出文件提示 */
@@ -192,7 +201,7 @@ export default {
       type: String,
       default: "文件已超出限制"
     },
-    
+
   },
   data() {
     return {
@@ -205,6 +214,42 @@ export default {
       eHeight: "",
       eWidth: "",
     };
+  },
+  watch: {
+    initialFileList: {
+      handler(val) {
+        this.fileList = [];
+        if (Array.isArray(val) && val.length != 0) {
+          let newArray = [];
+          for (let index = 0; index < val.length; index++) {
+            /** 判断 用户传入的数据是否有 name ，如果没有则在 url 中提取 */
+            if (Object.prototype.toString.call(val[index]) === '[object Object]' && val[index].name) {
+              this.fileList.push(val[index])
+            } else {
+              const element = val[index];
+              const fileName = getFileNameFromUrl(element);
+              if (fileName) {
+                let newObj = {
+                  url: element,
+                  name: decodeURIComponent(fileName),
+                }
+                newArray.push(newObj);
+              } else {
+                console.log("Failed to get the file name.");
+              }
+            }
+          }
+          if (Array.isArray(newArray) && newArray.length != 0) {
+            const arrayList = this.fileList.concat(newArray);
+            this.fileList = JSON.parse(JSON.stringify(arrayList))
+          }
+        } else {
+          this.fileList = val
+        }
+      },
+      immediate: true,
+      deep: true,
+    }
   },
   computed: {
     fileType() {
@@ -267,33 +312,33 @@ export default {
      * 文件变化
      */
     onChange(file, fileList) {
-      //上传成功之后清除历史记录
-      // 获取文件后缀名
+      /** 自动上传 */
+      if (this.automaticUpload) {
+        this.automaticUpload(file, fileList)
+      }else {
+        this.fileList.push(file);
+      }
+
       let suffix = this.getFileType(file.name);
       if (!this.suffixArray.includes(suffix)) {
         this.$message.warning("文件格式错误，请重新上传！");
         const currIdx = this.fileList.indexOf(file);
         this.fileList.splice(currIdx, 1);
-        return;
+        return false;
       }
       const isL500M = file.size / 1024 / 1024 > this.fileSize;
       if (isL500M) {
         this.$message.error(`上传文件大小不能超过 ${this.fileSize}MB`);
         const currIdx = this.fileList.indexOf(file);
         this.fileList.splice(currIdx, 1);
-        return;
-      }
-      this.fileList = fileList;
-      
-      /** 自动上传 */
-      if(this.automaticUpload) {
-        this.automaticUpload(file, fileList)
+        return false;
       }
 
       /** 重新上传 */
       if (this.numFiles === 1) {
         this.$refs["upload"].clearFiles();
       }
+
       if (this.echoData === "card") {
         /** 将 file 文件渲染到页面 */
         let files = event.target.files[0];
@@ -313,11 +358,7 @@ export default {
 
     /** 文件超出个数 */
     onExceed() {
-      return this.$message.warning(this.exceedTip)
-    },
-    onSuccess(res, file) {
-      console.log(res, file, "&&&&&&&&&");
-
+      return this.$message.warning(this.exceedTip);
     },
 
     /**
@@ -334,9 +375,12 @@ export default {
 
     /** 删除文件 */
     removeFile(item, i) {
-      this.fileList.splice(i, 1)
-      this.$emit("input", this.fileList)
-      this.$emit("removeFile", item)
+      if(this.automaticUpload) {
+        this.$emit("removeFile", item);
+      }else {
+        this.fileList.splice(i, 1);
+        this.$emit("input", this.fileList);
+      }
     }
   },
 };

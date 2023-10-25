@@ -20,26 +20,26 @@
       </template>
     </wangxiaoStep>
     <div style="display: flex; margin: 50px;">
-      <WangxiaoUpload :automatic-upload="automaticUpload" :numFiles="1" style="margin-right: 20px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg', 'doc', 'docx', 'pdf']" :multiple="false">
+      <WangxiaoUpload @removeFile="removeFile" :initialFileList="initialFileList" :automatic-upload="automaticUpload" style="margin-right: 20px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg', 'doc', 'docx', 'pdf']" :multiple="false">
       </WangxiaoUpload>
 
-      <WangxiaoUpload echo="card" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false">
-      </WangxiaoUpload>
+      <!-- <WangxiaoUpload echo="card" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false">
+      </WangxiaoUpload> -->
     </div>
 
     <div style="display: flex; margin: 50px;">
-      <wangxiao-upload id-card frontBack="front" style="margin-right: 20px;width: 406px;"
+      <!-- <wangxiao-upload id-card frontBack="front" style="margin-right: 20px;width: 406px;"
         :suffixArray="['jpg', 'png', 'jpeg']" :multiple="false"></wangxiao-upload>
       <wangxiao-upload idCard frontBack="back" style="width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
-        :multiple="false"></wangxiao-upload>
+        :multiple="false"></wangxiao-upload> -->
     </div>
 
-    <wangxiao-upload frontBack="back" style="margin: 50px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
+    <!-- <wangxiao-upload frontBack="back" style="margin: 50px; width: 406px;" :suffixArray="['jpg', 'png', 'jpeg']"
       :multiple="false">
       <template #content>
         <div>自定义内容</div>
       </template>
-    </wangxiao-upload>
+    </wangxiao-upload> -->
 
     <wangxiao-editor></wangxiao-editor>
     <wangxiaoRender age="111111" @chenage="onChenage">
@@ -70,6 +70,7 @@ export default {
   data() {
     return {
       name: 'Demi',
+      initialFileList: ["https://168wangxiao.oss-cn-beijing.aliyuncs.com/graduateFile/08ba047f-991f-48cf-9209-9ee76dd02df2_新建 DOC 文档.doc"],
       data,
       tabl,
       columns,
@@ -81,7 +82,7 @@ export default {
         {
           state: 1,
           names: "第一学期",
-          fieldName: 'aaa'
+          fieldName: 'aaa',
         },
         {
           state: 0,
@@ -179,6 +180,10 @@ export default {
     console.log(getRootPath(), "********");
   },
   methods: {
+    removeFile(file) {
+      console.log(file);
+      this.initialFileList = JSON.parse(JSON.stringify([]))
+    },
     automaticUpload(file, files) {
       console.log(file, files, "*****");
     },
